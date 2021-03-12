@@ -88,6 +88,9 @@ commands:
   speed:
     description: Gibt dir Speed
     permission: mario.speed
+  chatspammer:
+    description: Spammt die Zahlen von 1 bis 100 in den Chat
+    permission: mario.chatspammer
 
 permissions:
   mario.*:
@@ -116,6 +119,7 @@ permissions:
       mario.night: true
       mario.timer: true
       mario.speed: true
+      mario.chatspammer: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -184,4 +188,7 @@ permissions:
     default: op
   mario.speed:
     description: Rechte für den /speed Command!
+    default: op
+  mario.chatspammer:
+    description: Rechte für den /chatspammer Command!
     default: op

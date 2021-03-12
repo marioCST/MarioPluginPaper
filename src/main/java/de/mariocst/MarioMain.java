@@ -5,6 +5,7 @@ import de.mariocst.commands.Chat.*;
 import de.mariocst.commands.Player.*;
 import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Util.*;
+import de.mariocst.commands.WTF.ChatSpammerCommand;
 import de.mariocst.commands.World.*;
 import de.mariocst.listeners.*;
 import de.mariocst.timer.*;
@@ -103,6 +104,9 @@ public final class MarioMain extends JavaPlugin {
         //World
         Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
         Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
+
+        //WTF
+        Bukkit.getPluginCommand("chatspammer").setExecutor(new ChatSpammerCommand());
 
     }
 
