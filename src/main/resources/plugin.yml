@@ -1,0 +1,187 @@
+name: MarioPlugIn
+version: ${project.version}
+main: de.mariocst.MarioMain
+api-version: 1.16
+authors: [ marioCST ]
+description: marioCSTs 1.16.5 PlugIn
+
+commands:
+  heal:
+    description: Dieser Command heilt dich.
+    aliases: ["healme", "h"]
+    permission: mario.heal
+  date:
+    description: Zeigt das Datum an.
+    permission: mario.date
+  lol:
+    description: Schreibt lol.
+    permission: mario.lol
+  announcerestart:
+    description: ADMIN Schreibt 5mal in den Chat "SERVER RESTART! Bitte in 1 Min. wieder joinen!".
+    aliases: ["ars"]
+    permission: mario.restart
+  announcestop:
+    description: ADMIN Schreibt 5mal in den Chat "SERVER STOPP! Danke für's spielen!".
+    aliases: ["as"]
+    permission: mario.stop
+  announcereload:
+    description: ADMIN Schreibt 5mal in den Chat "SERVER RELOAD! Bitte keine Befehle eingeben!".
+    aliases: ["arl"]
+    permission: mario.reload
+  announcekick:
+    description: ADMIN Schreibt 5mal in den Chat "ALLE WERDEN GEKICKT! BITTE NACH KURZER ZEIT REJOINEN! NICHT DIREKT".
+    aliases: ["ak"]
+    permission: mario.kick
+  die:
+    description: Lässt dich sterben.
+    aliases: ["dead"]
+    permission: mario.die
+  broadcast:
+    description: ADMIN Schreibt die Nachricht nach dem Befehl in den Chat!
+    aliases: ["bc"]
+    permission: mario.broadcast
+  broadcast5:
+    description: ADMIN Schreibt die Nachricht nach dem Befehl 5 Mal in den Chat!
+    aliases: ["bc5"]
+    permission: mario.broadcast5
+  discord:
+    description: Link zum definierten Discord. (MUSS IMMER MIT /setlink NACH JEDEM RESTART/RELOAD/STOP NEU DEFINIERT WERDEN!!!!)
+    aliases: ["dc"]
+    permission: mario.discord
+  setlink:
+    description: Setzt den Link für /discord
+    aliases: ["sl"]
+    permission: mario.setlink
+  fly:
+    description: Fly Command
+    permission: mario.fly
+  dumb:
+    description: Du bist dumm
+    aliases: ["dumm"]
+    permission: mario.dumb
+  chatclear:
+    description: Cleart den Chat
+    aliases: ["cc"]
+    permission: mario.chatclear
+  clearinventory:
+    description: Cleart dein Inventar
+    aliases: ["clear", "clearinv"]
+    permission: mario.clear
+  gm:
+    description: Ist wie /gamemode nur in kurz
+    permission: mario.gm
+  nick:
+    description: Nickt dich
+    permission: mario.nick
+  unnick:
+    description: Unnickt dich
+    permission: mario.unnick
+  day:
+    description: Macht Tag
+    permission: mario.day
+  night:
+    description: Macht Nacht
+    permission: mario.night
+  timer:
+    description: Einfacher Timer Command
+    permission: mario.timer
+  speed:
+    description: Gibt dir Speed
+    permission: mario.speed
+
+permissions:
+  mario.*:
+    description: Alle Rechte zu diesem Trash PlugIn!
+    children:
+      mario.reload: true
+      mario.stop: true
+      mario.restart: true
+      mario.date: true
+      mario.lol: true
+      mario.heal: true
+      mario.kick: true
+      mario.die: true
+      mario.broadcast: true
+      mario.broadcast5: true
+      mario.discord: true
+      mario.setlink: true
+      mario.fly: true
+      mario.dumb: true
+      mario.chatclear: true
+      mario.clear: true
+      mario.gm: true
+      mario.nick: true
+      mario.unnick: true
+      mario.day: true
+      mario.night: true
+      mario.timer: true
+      mario.speed: true
+  mario.heal:
+    description: Damit kannst du dich heilen.
+    default: op
+  mario.reload:
+    description: Rechte für den /announcereload Command!
+    default: op
+  mario.stop:
+    description: Rechte für den /announcestop Command!
+    default: op
+  mario.restart:
+    description: Rechte für den /announcerestart Command!
+    default: op
+  mario.kick:
+    description: Rechte für den /announcekick Command!
+    default: op
+  mario.lol:
+    description: Rechte für den /lol Command!
+    default: op
+  mario.date:
+    description: Rechte für den /date Command!
+    default: op
+  mario.die:
+    description: Rechte für den /die Command!
+    default: op
+  mario.broadcast:
+    description: Rechte für den /broadcast Command!
+    default: op
+  mario.broadcast5:
+    description: Rechte für den /broadcast5 Command!
+    default: op
+  mario.discord:
+    description: Rechte für den /discord Command!
+    default: op
+  mario.setlink:
+    description: Rechte für den /setlink Command!
+    default: op
+  mario.fly:
+    description: Rechte für den /fly Command!
+    default: op
+  mario.dumb:
+    description: Rechte für den /dumb Command!
+    default: op
+  mario.chatclear:
+    description: Rechte für den /chatclear Command!
+    default: op
+  mario.clear:
+    description: Rechte für den /clearinventory Command!
+    default: op
+  mario.gm:
+    description: Rechte für den /gm Command!
+    default: op
+  mario.nick:
+    description: Rechte für den /nick Command!
+    default: op
+  mario.unnick:
+    description: Rechte für den /unnick Command!
+    default: op
+  mario.day:
+    description: Rechte für den /day Command!
+    default: op
+  mario.night:
+    description: Rechte für den /night Command!
+    default: op
+  mario.timer:
+    description: Rechte für den /timer Command!
+    default: op
+  mario.speed:
+    description: Rechte für den /speed Command!
+    default: op

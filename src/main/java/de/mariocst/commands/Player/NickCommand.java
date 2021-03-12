@@ -1,0 +1,43 @@
+package de.mariocst.commands.Player;
+
+import de.mariocst.MarioMain;
+import org.bukkit.Sound;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class NickCommand implements CommandExecutor {
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if(!(sender instanceof Player)) {
+            MarioMain.INSTANCE.log("Dieser Command kann nur InGame ausgeführt werden!");
+            return true;
+        }
+
+        Player player = (Player) sender;
+
+        if(player.hasPermission("mario.nick") || player.hasPermission("*") || player.isOp()) {
+            if (args.length == 1) {
+                if (args[0].length() < 16) {
+                    String newNick = String.join(" ",  args);
+                    player.setDisplayName(newNick);
+                    player.setPlayerListName(newNick);
+                    player.setCustomName(newNick);
+                    sender.sendMessage(MarioMain.PREFIX + "Dein Nickname wurde erfolgreich zu " + newNick + " geändert!");
+                } else {
+                    sender.sendMessage(MarioMain.PREFIX + "Bitte wähle einen Namen, der kürzer als 16 Zeichen ist!");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                }
+            } else {
+                sender.sendMessage(MarioMain.PREFIX + "Bitte gib einen Nickname ein, oder suche dir einen, der keine Leerzeichen hat!");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            }
+        } else {
+            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+        }
+        return true;
+    }
+}
