@@ -5,7 +5,7 @@ import de.mariocst.commands.Chat.*;
 import de.mariocst.commands.Player.*;
 import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Util.*;
-import de.mariocst.commands.WTF.ChatSpammerCommand;
+import de.mariocst.commands.WTF.*;
 import de.mariocst.commands.World.*;
 import de.mariocst.listeners.*;
 import de.mariocst.timer.*;
@@ -89,6 +89,7 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("gm").setExecutor(new GMCommand());
         Bukkit.getPluginCommand("heal").setExecutor(new HealCommand());
         Bukkit.getPluginCommand("nick").setExecutor(new NickCommand());
+        Bukkit.getPluginCommand("realname").setExecutor(new RealnameCommand());
         Bukkit.getPluginCommand("speed").setExecutor(new SpeedCommand());
         Bukkit.getPluginCommand("unnick").setExecutor(new UnnickCommand());
 

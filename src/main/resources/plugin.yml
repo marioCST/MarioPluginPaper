@@ -91,6 +91,9 @@ commands:
   chatspammer:
     description: Spammt die Zahlen von 1 bis 100 in den Chat
     permission: mario.chatspammer
+  realname:
+    description: Gibt dir den echten Namen eines genickten Spielers
+    permission: mario.realname
 
 permissions:
   mario.*:
@@ -120,6 +123,7 @@ permissions:
       mario.timer: true
       mario.speed: true
       mario.chatspammer: true
+      mario.realname: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -191,4 +195,7 @@ permissions:
     default: op
   mario.chatspammer:
     description: Rechte für den /chatspammer Command!
+    default: op
+  mario.realname:
+    description: Rechte für den /realname Command!
     default: op
