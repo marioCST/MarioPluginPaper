@@ -14,7 +14,6 @@ public class TimerCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-
         if (sender instanceof Player) {
             Player player = (Player) sender;
 

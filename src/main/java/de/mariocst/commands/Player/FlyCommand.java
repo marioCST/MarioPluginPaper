@@ -10,7 +10,7 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
-            sender.sendMessage("Du bist kein Spieler!");
+            MarioMain.INSTANCE.log("Du bist kein Spieler!");
             return false;
         }
 

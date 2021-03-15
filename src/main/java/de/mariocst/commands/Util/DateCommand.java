@@ -15,7 +15,7 @@ public class DateCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Date date = new Date();
         if(!(sender instanceof Player)) {
-            sender.sendMessage(MarioMain.PREFIX + "Es ist gerade " + ChatColor.GOLD + date.toString());
+            MarioMain.INSTANCE.log(MarioMain.PREFIX + "Es ist gerade " + ChatColor.GOLD + date.toString());
             return false;
         }
 

@@ -21,9 +21,9 @@ public class SetLinkCommand implements CommandExecutor {
                 }
                 Link = msg;
 
-                sender.sendMessage("Der Discord Link ist nun: " + Link);
+                MarioMain.INSTANCE.log("Der Discord Link ist nun: " + Link);
             } else {
-                sender.sendMessage("§cUsage: §e/setlink <Link>");
+                MarioMain.INSTANCE.log("§cUsage: §e/setlink <Link>");
             }
             return false;
         }
