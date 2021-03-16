@@ -29,9 +29,8 @@ public class JoinListener implements Listener {
                 player.sendMessage(MarioMain.PREFIX + "§a§lHi Damian. Habe hier ein PlugIn gemacht.");
                 event.setJoinMessage(MarioMain.PREFIX + "§5§lFreund++ §8| §7_xZockerLP_ §aist nun Online!");
             } else {
-                player.sendMessage(MarioMain.PREFIX + ChatColor.GOLD + "Hallo und willkommen auf dem Server von §b§lDEV §amarioCST!");
+                player.sendMessage(MarioMain.PREFIX + ChatColor.GOLD + "Hallo und willkommen auf dem Server von §4§lOWNER §amarioCST!");
                 event.setJoinMessage(MarioMain.PREFIX + ChatColor.GREEN + player.getName() + ChatColor.DARK_GREEN + ChatColor.BOLD + ", der wilde Spieler, ist erschienen");
             }
-
     }
 }
