@@ -65,7 +65,7 @@ commands:
     permission: mario.chatclear
   clearinventory:
     description: Cleart dein Inventar
-    aliases: ["clear", "clearinv"]
+    aliases: ["clear", "clearinv", "cleari", "ci"]
     permission: mario.clear
   gm:
     description: Ist wie /gamemode nur in kurz
