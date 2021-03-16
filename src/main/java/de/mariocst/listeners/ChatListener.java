@@ -13,15 +13,15 @@ public class ChatListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if(player.getDisplayName().equals("marioCST")) {
+        if(player.getName().equals("marioCST")) {
             event.setFormat(ChatColor.DARK_RED + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.YELLOW + "%2$s");
-        } else if(player.getDisplayName().equals("Hegge06")) {
+        } else if(player.getName().equals("Hegge06")) {
             event.setFormat(ChatColor.DARK_PURPLE + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "%2$s");
-        } else if(player.getDisplayName().equals("Pixellord05")) {
+        } else if(player.getName().equals("Pixellord05")) {
             event.setFormat(ChatColor.DARK_AQUA + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.RED + "%2$s");
-        } else if(player.getDisplayName().equals("Godlukas")) {
+        } else if(player.getName().equals("Godlukas")) {
             event.setFormat(ChatColor.DARK_AQUA + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.RED + "%2$s");
-        } else if(player.getDisplayName().equals("_xZockerLP_")) {
+        } else if(player.getName().equals("_xZockerLP_")) {
             event.setFormat(ChatColor.DARK_AQUA + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.RED + "%2$s");
         } else {
             event.setFormat(ChatColor.AQUA + "%1$s" + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
