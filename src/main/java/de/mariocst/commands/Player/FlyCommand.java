@@ -1,6 +1,7 @@
 package de.mariocst.commands.Player;
 
 import de.mariocst.MarioMain;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,6 +28,7 @@ public class FlyCommand implements CommandExecutor {
             }
         } else {
             sender.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;
     }

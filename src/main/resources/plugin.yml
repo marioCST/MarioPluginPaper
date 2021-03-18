@@ -94,6 +94,10 @@ commands:
   realname:
     description: Gibt dir den echten Namen eines genickten Spielers
     permission: mario.realname
+  backpack:
+    description: Öffnet ein personalisiertes BackPack!
+    aliases: ["bp"]
+    permission: mario.backpack
 
 permissions:
   mario.*:
@@ -124,6 +128,7 @@ permissions:
       mario.speed: true
       mario.chatspammer: true
       mario.realname: true
+      mario.backpack: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -198,4 +203,7 @@ permissions:
     default: op
   mario.realname:
     description: Rechte für den /realname Command!
+    default: op
+  mario.backpack:
+    description: Rechte für den /backpack Command!
     default: op

@@ -1,5 +1,6 @@
 package de.mariocst;
 
+import de.mariocst.backpack.BackpackManager;
 import de.mariocst.commands.Announcements.*;
 import de.mariocst.commands.Chat.*;
 import de.mariocst.commands.Player.*;
@@ -21,8 +22,8 @@ public final class MarioMain extends JavaPlugin {
     public static MarioMain INSTANCE;
     private static MarioMain instance;
 
+    private BackpackManager backpackManager;
     private Config config;
-
     private Timer timer;
 
     @Override
@@ -42,6 +43,7 @@ public final class MarioMain extends JavaPlugin {
         listenerRegistration();
 
         timer = new Timer();
+        backpackManager = new BackpackManager();
 
         log("marioCST's PlugIn geladen!");
     }
@@ -50,6 +52,7 @@ public final class MarioMain extends JavaPlugin {
     public void onDisable() {
         log("marioCST's PlugIn entladen!");
         timer.save();
+        backpackManager.save();
         config.save();
     }
 
@@ -82,6 +85,7 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("chatclear").setExecutor(new ChatClearCommand());
 
         //Player
+        Bukkit.getPluginCommand("backpack").setExecutor(new BackpackCommand());
         Bukkit.getPluginCommand("clearinventory").setExecutor(new ClearInventoryCommand());
         Bukkit.getPluginCommand("die").setExecutor(new DieCommand());
         Bukkit.getPluginCommand("dumb").setExecutor(new DumbCommand());
@@ -117,5 +121,9 @@ public final class MarioMain extends JavaPlugin {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public BackpackManager getBackpackManager() {
+        return backpackManager;
     }
 }
