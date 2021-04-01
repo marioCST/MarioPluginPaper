@@ -1,6 +1,7 @@
 package de.mariocst.listeners;
 
 import de.mariocst.MarioMain;
+import de.mariocst.scoreboard.TestScoreboard;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,5 +33,7 @@ public class JoinListener implements Listener {
                 player.sendMessage(MarioMain.PREFIX + ChatColor.GOLD + "Hallo und willkommen auf dem Server von §4§lOWNER §amarioCST!");
                 event.setJoinMessage(MarioMain.PREFIX + ChatColor.GREEN + player.getName() + ChatColor.DARK_GREEN + ChatColor.BOLD + ", der wilde Spieler, ist erschienen");
             }
+
+            new TestScoreboard(player);
     }
 }
