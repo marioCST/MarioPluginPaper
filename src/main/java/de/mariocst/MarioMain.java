@@ -103,6 +103,7 @@ public final class MarioMain extends JavaPlugin {
         //Util
         Bukkit.getPluginCommand("date").setExecutor(new DateCommand());
         Bukkit.getPluginCommand("discord").setExecutor(new DiscordCommand());
+        Bukkit.getPluginCommand("enderchest").setExecutor(new ECCommand());
         Bukkit.getPluginCommand("lol").setExecutor(new LolCommand());
         Bukkit.getPluginCommand("timer").setExecutor(new TimerCommand());
 

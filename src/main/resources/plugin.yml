@@ -98,6 +98,10 @@ commands:
     description: Öffnet ein personalisiertes BackPack!
     aliases: ["bp"]
     permission: mario.backpack
+  enderchest:
+    description: Öffnet die persönliche Enderchest!
+    aliases: ["ec"]
+    permission: mario.ec
 
 permissions:
   mario.*:
@@ -129,6 +133,7 @@ permissions:
       mario.chatspammer: true
       mario.realname: true
       mario.backpack: true
+      mario.ec: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -206,4 +211,7 @@ permissions:
     default: op
   mario.backpack:
     description: Rechte für den /backpack Command!
+    default: op
+  mario.ex:
+    description: Rechte für den /enderchest Command!
     default: op
