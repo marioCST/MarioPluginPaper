@@ -6,6 +6,7 @@ import de.mariocst.commands.Chat.*;
 import de.mariocst.commands.Invsee.EnderInvseeCommand;
 import de.mariocst.commands.Invsee.InvseeCommand;
 import de.mariocst.commands.Player.*;
+import de.mariocst.commands.Server.KickAllCommand;
 import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Util.*;
 import de.mariocst.commands.WTF.*;
@@ -102,6 +103,9 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("realname").setExecutor(new RealnameCommand());
         Bukkit.getPluginCommand("speed").setExecutor(new SpeedCommand());
         Bukkit.getPluginCommand("unnick").setExecutor(new UnnickCommand());
+
+        //Server
+        Bukkit.getPluginCommand("kickall").setExecutor(new KickAllCommand());
 
         //Setter
         Bukkit.getPluginCommand("setlink").setExecutor(new SetLinkCommand());

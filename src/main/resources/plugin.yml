@@ -110,6 +110,10 @@ commands:
     description: Öffnet die Enderchest eines anderen Spielers!
     aliases: ["esee"]
     permission: mario.enderinvsee
+  kickall:
+    description: Kickt alle Spieler, die Online sind, außer den Commandsender!
+    aliases: ["ka"]
+    permission: mario.kickall
 
 permissions:
   mario.*:
@@ -144,6 +148,7 @@ permissions:
       mario.ec: true
       mario.invsee: true
       mario.enderinvsee: true
+      mario.kickall: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -230,4 +235,7 @@ permissions:
     default: op
   mario.enderinvsee:
     description: Rechte für den /enderinvsee Command!
+    default: op
+  mario.kickall:
+    description: Rechte für den /kickall Command!
     default: op
