@@ -102,6 +102,14 @@ commands:
     description: Öffnet die persönliche Enderchest!
     aliases: ["ec"]
     permission: mario.ec
+  invsee:
+    description: Öffnet das Inventar eines anderen Spielers!
+    aliases: ["isee"]
+    permission: mario.invsee
+  enderinvsee:
+    description: Öffnet die Enderchest eines anderen Spielers!
+    aliases: ["esee"]
+    permission: mario.enderinvsee
 
 permissions:
   mario.*:
@@ -134,6 +142,8 @@ permissions:
       mario.realname: true
       mario.backpack: true
       mario.ec: true
+      mario.invsee: true
+      mario.enderinvsee: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -212,6 +222,12 @@ permissions:
   mario.backpack:
     description: Rechte für den /backpack Command!
     default: op
-  mario.ex:
+  mario.ec:
     description: Rechte für den /enderchest Command!
+    default: op
+  mario.invsee:
+    description: Rechte für den /invsee Command!
+    default: op
+  mario.enderinvsee:
+    description: Rechte für den /enderinvsee Command!
     default: op

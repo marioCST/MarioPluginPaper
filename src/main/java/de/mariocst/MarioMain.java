@@ -3,6 +3,8 @@ package de.mariocst;
 import de.mariocst.backpack.BackpackManager;
 import de.mariocst.commands.Announcements.*;
 import de.mariocst.commands.Chat.*;
+import de.mariocst.commands.Invsee.EnderInvseeCommand;
+import de.mariocst.commands.Invsee.InvseeCommand;
 import de.mariocst.commands.Player.*;
 import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Util.*;
@@ -83,6 +85,10 @@ public final class MarioMain extends JavaPlugin {
         //Chat
         Bukkit.getPluginCommand("broadcast").setExecutor(new BroadcastCommand());
         Bukkit.getPluginCommand("chatclear").setExecutor(new ChatClearCommand());
+
+        //Invsee
+        Bukkit.getPluginCommand("enderinvsee").setExecutor(new EnderInvseeCommand());
+        Bukkit.getPluginCommand("invsee").setExecutor(new InvseeCommand());
 
         //Player
         Bukkit.getPluginCommand("backpack").setExecutor(new BackpackCommand());
