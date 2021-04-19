@@ -3,13 +3,11 @@ package de.mariocst;
 import de.mariocst.backpack.BackpackManager;
 import de.mariocst.commands.Announcements.*;
 import de.mariocst.commands.Chat.*;
-import de.mariocst.commands.Invsee.EnderInvseeCommand;
-import de.mariocst.commands.Invsee.InvseeCommand;
+import de.mariocst.commands.Invsee.*;
 import de.mariocst.commands.Player.*;
-import de.mariocst.commands.Server.KickAllCommand;
+import de.mariocst.commands.Server.*;
 import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Util.*;
-import de.mariocst.commands.WTF.*;
 import de.mariocst.commands.World.*;
 import de.mariocst.listeners.*;
 import de.mariocst.timer.*;
@@ -120,9 +118,6 @@ public final class MarioMain extends JavaPlugin {
         //World
         Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
         Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
-
-        //WTF
-        Bukkit.getPluginCommand("chatspammer").setExecutor(new ChatSpammerCommand());
 
     }
 
