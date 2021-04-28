@@ -22,7 +22,6 @@ public class RealnameCommand implements CommandExecutor {
                     Player t = MarioMain.getInstance().getServer().getPlayer(target);
 
                     if (args.length == 1) {
-                        //Why Try Catch
                         try {
                             if (null != t) {
                                 if (t.getName().equals(args[0])) {
