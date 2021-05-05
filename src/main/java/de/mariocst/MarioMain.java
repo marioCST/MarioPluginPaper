@@ -103,6 +103,7 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("unnick").setExecutor(new UnnickCommand());
 
         //Server
+        Bukkit.getPluginCommand("banall").setExecutor(new BanAllCommand());
         Bukkit.getPluginCommand("kickall").setExecutor(new KickAllCommand());
 
         //Setter

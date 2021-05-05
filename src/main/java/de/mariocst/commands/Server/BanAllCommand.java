@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class KickAllCommand implements CommandExecutor {
+public class BanAllCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
@@ -21,10 +21,10 @@ public class KickAllCommand implements CommandExecutor {
                     }
                     else {
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
-                            t.kickPlayer("Kicked by Admin");
+                            t.banPlayer("Banned by Admin");
                         }
 
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler gekickt!");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler gebannt!");
                     }
                 }
                 else if (args.length >= 1) {
@@ -40,9 +40,9 @@ public class KickAllCommand implements CommandExecutor {
                         }
 
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
-                            t.kickPlayer(reason);
+                            t.banPlayer(reason);
                         }
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gekickt!");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gebannt!");
                     }
                 }
                 else {
@@ -57,7 +57,7 @@ public class KickAllCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        if(player.hasPermission("mario.kickall") || player.hasPermission("*") || player.isOp()) {
+        if(player.hasPermission("mario.banall") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length == 0) {
                     int count = MarioMain.getInstance().getServer().getOnlinePlayers().size();
@@ -69,11 +69,11 @@ public class KickAllCommand implements CommandExecutor {
                     else {
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                             if (t != sender) {
-                                t.kickPlayer("Kicked by Admin");
+                                t.banPlayer("Banned by Admin");
                             }
                         }
 
-                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler gekickt!");
+                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler gebannt!");
                     }
                 }
                 else if (args.length >= 1) {
@@ -91,10 +91,10 @@ public class KickAllCommand implements CommandExecutor {
 
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                             if (t != sender) {
-                                t.kickPlayer(reason);
+                                t.banPlayer(reason);
                             }
                         }
-                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gekickt!");
+                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gebannt!");
                     }
                 }
                 else {
