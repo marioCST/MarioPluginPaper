@@ -95,7 +95,7 @@ commands:
     description: Gibt dir den echten Namen eines genickten Spielers
     permission: mario.realname
   backpack:
-    description: Öffnet ein personalisiertes BackPack!
+    description: Öffnet ein personalisiertes Backpack!
     aliases: ["bp"]
     permission: mario.backpack
   enderchest:
@@ -118,6 +118,10 @@ commands:
     description: Bannt alle Spieler, die Online sind, außer der Commandsender!
     aliases: [ "ba" ]
     permission: mario.banall
+  backpacklarge:
+    description: Öffnet ein personalisiertes Backpack mit der Größe einer Doppelkiste!
+    aliases: [ "bpl" ]
+    permission: mario.backpacklarge
 
 permissions:
   mario.*:
@@ -154,6 +158,7 @@ permissions:
       mario.enderinvsee: true
       mario.kickall: true
       mario.banall: true
+      mario.backpacklarge: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -246,4 +251,7 @@ permissions:
     default: op
   mario.banall:
     description: Rechte für den /banall Command!
+    default: op
+  mario.backpacklarge:
+    description: Rechte für den /backpacklarge Command!
     default: op

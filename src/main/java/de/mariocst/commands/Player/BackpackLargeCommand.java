@@ -2,6 +2,7 @@ package de.mariocst.commands.Player;
 
 import de.mariocst.MarioMain;
 import de.mariocst.backpack.Backpack;
+import de.mariocst.backpack.BackpackLarge;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class BackpackCommand implements CommandExecutor {
+public class BackpackLargeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
@@ -19,10 +20,10 @@ public class BackpackCommand implements CommandExecutor {
         } else {
             Player player = (Player) sender;
 
-            if(player.hasPermission("mario.backpack") || player.hasPermission("mario.*") || player.isOp()) {
-                Backpack backpack = MarioMain.getInstance().getBackpackManager().getBackpack(player.getUniqueId());
+            if(player.hasPermission("mario.backpacklarge") || player.hasPermission("mario.*") || player.isOp()) {
+                BackpackLarge backpackLarge = MarioMain.getInstance().getBackpackManagerLarge().getBackpackLarge(player.getUniqueId());
 
-                player.openInventory(backpack.getInventory());
+                player.openInventory(backpackLarge.getInventory());
             }
             else {
                 sender.sendMessage(MarioMain.PREFIX + "Keine Rechte!");

@@ -1,6 +1,7 @@
 package de.mariocst;
 
 import de.mariocst.backpack.BackpackManager;
+import de.mariocst.backpack.BackpackManagerLarge;
 import de.mariocst.commands.Announcements.*;
 import de.mariocst.commands.Chat.*;
 import de.mariocst.commands.Invsee.*;
@@ -24,14 +25,17 @@ public final class MarioMain extends JavaPlugin {
     private static MarioMain instance;
 
     private BackpackManager backpackManager;
+    private BackpackManagerLarge backpackManagerLarge;
     private Config config;
     private Backpacks backpacks;
+    private BackpacksLarge backpacksLarge;
     private Timer timer;
 
     @Override
     public void onLoad() {
         instance = this;
         backpacks = new Backpacks();
+        backpacksLarge = new BackpacksLarge();
         config = new Config();
     }
 
@@ -47,6 +51,7 @@ public final class MarioMain extends JavaPlugin {
 
         timer = new Timer();
         backpackManager = new BackpackManager();
+        backpackManagerLarge = new BackpackManagerLarge();
 
         log("marioCST's PlugIn geladen!");
     }
@@ -56,7 +61,9 @@ public final class MarioMain extends JavaPlugin {
         log("marioCST's PlugIn entladen!");
         timer.save();
         backpackManager.save();
+        backpackManagerLarge.save();
         backpacks.save();
+        backpacksLarge.save();
         config.save();
     }
 
@@ -68,6 +75,11 @@ public final class MarioMain extends JavaPlugin {
     @NotNull
     public Backpacks getBackpacks() {
         return backpacks;
+    }
+
+    @NotNull
+    public BackpacksLarge getBackpacksLarge() {
+        return backpacksLarge;
     }
 
     private void listenerRegistration() {
@@ -98,6 +110,7 @@ public final class MarioMain extends JavaPlugin {
 
         //Player
         Bukkit.getPluginCommand("backpack").setExecutor(new BackpackCommand());
+        Bukkit.getPluginCommand("backpacklarge").setExecutor(new BackpackLargeCommand());
         Bukkit.getPluginCommand("clearinventory").setExecutor(new ClearInventoryCommand());
         Bukkit.getPluginCommand("die").setExecutor(new DieCommand());
         Bukkit.getPluginCommand("dumb").setExecutor(new DumbCommand());
@@ -139,5 +152,9 @@ public final class MarioMain extends JavaPlugin {
 
     public BackpackManager getBackpackManager() {
         return backpackManager;
+    }
+
+    public BackpackManagerLarge getBackpackManagerLarge() {
+        return backpackManagerLarge;
     }
 }
