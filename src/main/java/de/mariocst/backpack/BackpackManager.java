@@ -1,7 +1,7 @@
 package de.mariocst.backpack;
 
 import de.mariocst.MarioMain;
-import de.mariocst.utils.Config;
+import de.mariocst.utils.Backpacks;
 
 import java.io.IOException;
 import java.util.*;
@@ -30,14 +30,14 @@ public class BackpackManager {
     }
 
     private void load() {
-        Config config = MarioMain.getInstance().getConfiguration();
+        Backpacks backpacks = MarioMain.getInstance().getBackpacks();
 
-        List<String> uuids = config.getConfig().getStringList("backpacks");
+        List<String> uuids = backpacks.getBackpacks().getStringList("backpacks");
 
         uuids.forEach(s -> {
             UUID uuid = UUID.fromString(s);
 
-            String base64 = config.getConfig().getString("backpack." + s);
+            String base64 = backpacks.getBackpacks().getString("backpack." + s);
 
             try {
                 map.put(uuid, new Backpack(uuid, base64));
@@ -48,7 +48,7 @@ public class BackpackManager {
     }
 
     public void save() {
-        Config config = MarioMain.getInstance().getConfiguration();
+        Backpacks backpacks = MarioMain.getInstance().getBackpacks();
 
         List<String> uuids = new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class BackpackManager {
             uuids.add(uuid.toString());
         }
 
-        config.getConfig().set("backpacks", uuids);
-        map.forEach((uuid, backpack) -> config.getConfig().set("backpack." + uuid.toString(), backpack.toBase64()));
+        backpacks.getBackpacks().set("backpacks", uuids);
+        map.forEach((uuid, backpack) -> backpacks.getBackpacks().set("backpack." + uuid.toString(), backpack.toBase64()));
     }
 }

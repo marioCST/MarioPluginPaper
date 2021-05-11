@@ -25,11 +25,13 @@ public final class MarioMain extends JavaPlugin {
 
     private BackpackManager backpackManager;
     private Config config;
+    private Backpacks backpacks;
     private Timer timer;
 
     @Override
     public void onLoad() {
         instance = this;
+        backpacks = new Backpacks();
         config = new Config();
     }
 
@@ -54,12 +56,18 @@ public final class MarioMain extends JavaPlugin {
         log("marioCST's PlugIn entladen!");
         timer.save();
         backpackManager.save();
+        backpacks.save();
         config.save();
     }
 
     @NotNull
     public Config getConfiguration() {
         return config;
+    }
+
+    @NotNull
+    public Backpacks getBackpacks() {
+        return backpacks;
     }
 
     private void listenerRegistration() {
