@@ -65,7 +65,6 @@ public final class MarioMain extends JavaPlugin {
     private void listenerRegistration() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
-        pluginManager.registerEvents(new QuitListener(), this);
     }
 
     public void log(String text) {
