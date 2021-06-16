@@ -18,7 +18,7 @@ public class Reload implements CommandExecutor {
             while (schleife1 < 5) {
                 schleife1++;
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX + "§6§lSERVER RELOAD! BITTE KEINE BEFEHLE EINGEBEN!");
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + "§6§lSERVER RELOAD! BITTE KEINE BEFEHLE EINGEBEN!");
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -33,7 +33,7 @@ public class Reload implements CommandExecutor {
             while (schleife2 < 5) {
                 schleife2++;
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX + "§6§lSERVER RELOAD! BITTE KEINE BEFEHLE EINGEBEN!");
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + "§6§lSERVER RELOAD! BITTE KEINE BEFEHLE EINGEBEN!");
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class Reload implements CommandExecutor {
                 }
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

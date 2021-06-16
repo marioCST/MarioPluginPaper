@@ -1,7 +1,7 @@
 package de.mariocst.timer;
 
 import de.mariocst.MarioMain;
-import de.mariocst.utils.*;
+import de.mariocst.utils.Config;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;

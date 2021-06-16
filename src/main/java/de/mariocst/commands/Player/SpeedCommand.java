@@ -6,13 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class SpeedCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Dieser Befehl geht nur InGame!");
+            MarioMain.getInstance().log("Dieser Befehl geht nur InGame!");
         } else {
             Player player = (Player) sender;
 
@@ -23,34 +22,34 @@ public class SpeedCommand implements CommandExecutor {
                         try {
                             switch (args[0].toLowerCase()) {
                                 case "fly": {
-                                    if (value < 1 && value > -1) {
+                                    if (value <= 1 && value >= -1) {
                                         player.setFlySpeed(value);
-                                        sender.sendMessage(MarioMain.PREFIX + "Dein Fly Speed ist nun: " + value);
+                                        sender.sendMessage(MarioMain.getPrefix() + "Dein Fly Speed ist nun: " + value);
                                     }
                                     else if (value > 1) {
-                                        player.sendMessage(MarioMain.PREFIX + "Bitte benutze eine kleinere Zahl!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
                                     }
                                     else if (value < -1) {
-                                        player.sendMessage(MarioMain.PREFIX + "Bitte benutze eine größere Zahl!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
                                     }
                                     else {
-                                        player.sendMessage(MarioMain.PREFIX + "Irgendetwas ist GEWALTIG schief gelaufen!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Irgendetwas ist GEWALTIG schief gelaufen!");
                                     }
                                     break;
                                 }
                                 case "walk": {
                                     if (value < 1 && value > -1) {
                                         player.setWalkSpeed(value);
-                                        sender.sendMessage(MarioMain.PREFIX + "Dein Walk Speed ist nun: " + value);
+                                        sender.sendMessage(MarioMain.getPrefix() + "Dein Walk Speed ist nun: " + value);
                                     }
                                     else if (value > 1) {
-                                        player.sendMessage(MarioMain.PREFIX + "Bitte benutze eine kleinere Zahl!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
                                     }
                                     else if (value < -1) {
-                                        player.sendMessage(MarioMain.PREFIX + "Bitte benutze eine größere Zahl!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
                                     }
                                     else {
-                                        player.sendMessage(MarioMain.PREFIX + "Irgendetwas ist GEWALTIG schief gelaufen!");
+                                        player.sendMessage(MarioMain.getPrefix() + "Irgendetwas ist GEWALTIG schief gelaufen!");
                                     }
                                     break;
                                 }
@@ -61,7 +60,7 @@ public class SpeedCommand implements CommandExecutor {
                                 }
                             }
                         } catch (NumberFormatException e) {
-                            sender.sendMessage(MarioMain.PREFIX + "Bitte gib eine gültige Zahl an!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Bitte gib eine gültige Zahl an!");
                             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                             e.printStackTrace();
                         }
@@ -75,7 +74,7 @@ public class SpeedCommand implements CommandExecutor {
                     e.printStackTrace();
                 }
             } else {
-                sender.sendMessage(MarioMain.PREFIX + "§cKeine Rechte!");
+                sender.sendMessage(MarioMain.getPrefix() + "§cKeine Rechte!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
             }
         }
@@ -83,6 +82,6 @@ public class SpeedCommand implements CommandExecutor {
     }
 
     public void sendUsage(CommandSender sender) {
-        sender.sendMessage(MarioMain.PREFIX + "§cUsage: §e/speed fly/walk <Value>");
+        sender.sendMessage(MarioMain.getPrefix() + "§cUsage: §e/speed fly/walk <Value>");
     }
 }

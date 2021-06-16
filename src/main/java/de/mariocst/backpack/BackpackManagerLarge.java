@@ -1,7 +1,6 @@
 package de.mariocst.backpack;
 
 import de.mariocst.MarioMain;
-import de.mariocst.utils.Backpacks;
 import de.mariocst.utils.BackpacksLarge;
 
 import java.io.IOException;

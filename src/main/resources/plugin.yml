@@ -65,7 +65,7 @@ commands:
     permission: mario.chatclear
   clearinventory:
     description: Cleart dein Inventar
-    aliases: ["clear", "clearinv", "cleari", "ci"]
+    aliases: ["clearinv", "cleari", "ci"]
     permission: mario.clear
   gm:
     description: Ist wie /gamemode nur in kurz
@@ -88,9 +88,6 @@ commands:
   speed:
     description: Gibt dir Speed
     permission: mario.speed
-  chatspammer:
-    description: Spammt die Zahlen von 1 bis 100 in den Chat
-    permission: mario.chatspammer
   realname:
     description: Gibt dir den echten Namen eines genickten Spielers
     permission: mario.realname
@@ -122,6 +119,40 @@ commands:
     description: Öffnet ein personalisiertes Backpack mit der Größe einer Doppelkiste!
     aliases: [ "bpl" ]
     permission: mario.backpacklarge
+  sendactionbar:
+    description: Sende eine "ActionBar" mit einer beliebigen Nachricht an einen Spieler!
+    aliases: [ "sab" ]
+    permission: mario.sendactionbar
+  sendmessage:
+    description: Sende eine Nachricht an einen Spieler!
+    aliases: [ "sm" ]
+    permission: mario.sendmessage
+  sendtitle:
+    description: Sende einen Titel mit einer beliebigen Nachricht an einen Spieler!
+    aliases: [ "st" ]
+    permission: mario.sendtitle
+  clearenderchest:
+    description: Cleart deine Ender Chest
+    aliases: [ "clearec", "cec" ]
+    permission: mario.clearenderchest
+  backpackstored:
+    description: Siehe in ein gelagertes Backpack eines Spielers!
+    aliases: [ "bps" ]
+    permission: mario.backpackstored
+  restoreinventory:
+    description: Gebe einen Spieler das gelagerte Inventar zurück! BETA
+    aliases: [ "riv", "reinv", "rinv" ]
+    permission: mario.restoreinventory
+  storeinventory:
+    description: Lager das Inventar eines Spielers! BETA
+    aliases: [ "siv", "stinv", "sinv" ]
+    permission: mario.storeinventory
+  troll:
+    description: Trolle jemandem mit einem Explosions Paket haha
+    permission: mario.troll
+  sign:
+    description: Signiert ein Item in deiner Hand!
+    permission: mario.sign
 
 permissions:
   mario.*:
@@ -150,7 +181,6 @@ permissions:
       mario.night: true
       mario.timer: true
       mario.speed: true
-      mario.chatspammer: true
       mario.realname: true
       mario.backpack: true
       mario.ec: true
@@ -159,9 +189,22 @@ permissions:
       mario.kickall: true
       mario.banall: true
       mario.backpacklarge: true
+      mario.sendactionbar: true
+      mario.sendmessage: true
+      mario.sendtitle: true
+      mario.clearenderchest: true
+      mario.backpackstored: true
+      mario.restoreinventory: true
+      mario.storeinventory: true
+      mario.troll: true
+      mario.sign: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
+    children:
+      mario.heal.other:
+        description: Rechte, um andere zu heilen!
+        default: op
   mario.reload:
     description: Rechte für den /announcereload Command!
     default: op
@@ -228,9 +271,6 @@ permissions:
   mario.speed:
     description: Rechte für den /speed Command!
     default: op
-  mario.chatspammer:
-    description: Rechte für den /chatspammer Command!
-    default: op
   mario.realname:
     description: Rechte für den /realname Command!
     default: op
@@ -254,4 +294,31 @@ permissions:
     default: op
   mario.backpacklarge:
     description: Rechte für den /backpacklarge Command!
+    default: op
+  mario.sendactionbar:
+    description: Rechte für den /sendactionbar Command!
+    default: op
+  mario.sendmessage:
+    description: Rechte für den /sendmessage Command!
+    default: op
+  mario.sendtitle:
+    description: Rechte für den /sendtitle Command!
+    default: op
+  mario.clearenderchest:
+    description: Rechte für den /clearenderchest Command!
+    default: op
+  mario.backpackstored:
+    description: Rechte für den /backpackstored Command!
+    default: op
+  mario.restoreinventory:
+    description: Rechte für den /restoreinventory Command!
+    default: op
+  mario.storeinventory:
+    description: Rechte für den /storeinventory Command!
+    default: op
+  mario.troll:
+    description: Rechte für den /troll Command!
+    default: op
+  mario.sign:
+    description: Rechte für den /sign Command!
     default: op

@@ -16,7 +16,7 @@ public class KickAllCommand implements CommandExecutor {
                 if (args.length == 0) {
                     int count = MarioMain.getInstance().getServer().getOnlinePlayers().size();
                     if (count == 0) {
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Kein Spieler ist Online lol");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Kein Spieler ist Online lol");
                         return false;
                     }
                     else {
@@ -24,13 +24,13 @@ public class KickAllCommand implements CommandExecutor {
                             t.kickPlayer("Kicked by Admin");
                         }
 
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler gekickt!");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Alle Spieler gekickt!");
                     }
                 }
                 else if (args.length >= 1) {
                     int count = MarioMain.getInstance().getServer().getOnlinePlayers().size();
                     if (count == 0) {
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Kein Spieler ist Online lol");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Kein Spieler ist Online lol");
                         return false;
                     }
                     else {
@@ -42,16 +42,16 @@ public class KickAllCommand implements CommandExecutor {
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                             t.kickPlayer(reason);
                         }
-                        Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gekickt!");
+                        Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Alle Spieler mit dem Grund " + reason + " gekickt!");
                     }
                 }
                 else {
-                    Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Ungültige Parameter Länge!");
+                    Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                Bukkit.getConsoleSender().sendMessage(MarioMain.PREFIX + "Ungültige Parameter Länge!");
+                Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
             }
             return false;
         }
@@ -62,7 +62,7 @@ public class KickAllCommand implements CommandExecutor {
                 if (args.length == 0) {
                     int count = MarioMain.getInstance().getServer().getOnlinePlayers().size();
                     if (count == 1) {
-                        sender.sendMessage(MarioMain.PREFIX + "Kein Spieler ist Online lol");
+                        sender.sendMessage(MarioMain.getPrefix() + "Kein Spieler ist Online lol");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                         return false;
                     }
@@ -73,13 +73,13 @@ public class KickAllCommand implements CommandExecutor {
                             }
                         }
 
-                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler gekickt!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Alle Spieler gekickt!");
                     }
                 }
                 else if (args.length >= 1) {
                     int count = MarioMain.getInstance().getServer().getOnlinePlayers().size();
                     if (count == 1) {
-                        sender.sendMessage(MarioMain.PREFIX + "Kein Spieler ist Online lol");
+                        sender.sendMessage(MarioMain.getPrefix() + "Kein Spieler ist Online lol");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                         return false;
                     }
@@ -94,21 +94,21 @@ public class KickAllCommand implements CommandExecutor {
                                 t.kickPlayer(reason);
                             }
                         }
-                        sender.sendMessage(MarioMain.PREFIX + "Alle Spieler mit dem Grund " + reason + " gekickt!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Alle Spieler mit dem Grund " + reason + " gekickt!");
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.PREFIX + "Ungültige Parameter Länge!");
+                    sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                sender.sendMessage(MarioMain.PREFIX + "Ungültige Parameter Länge!");
+                sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

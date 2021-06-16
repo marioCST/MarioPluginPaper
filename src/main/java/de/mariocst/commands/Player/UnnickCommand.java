@@ -12,7 +12,7 @@ public class UnnickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Dieser Command kann nur InGame ausgeführt werden!");
+            MarioMain.getInstance().log("Dieser Command kann nur InGame ausgeführt werden!");
             return true;
         }
 
@@ -22,9 +22,9 @@ public class UnnickCommand implements CommandExecutor {
             player.setCustomName(player.getName());
             player.setPlayerListName(player.getName());
             player.setDisplayName(player.getName());
-            player.sendMessage(MarioMain.PREFIX + "Dein Nickname wurde erfolgreich zurückgesetzt!");
+            player.sendMessage(MarioMain.getPrefix() + "Dein Nickname wurde erfolgreich zurückgesetzt!");
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return true;

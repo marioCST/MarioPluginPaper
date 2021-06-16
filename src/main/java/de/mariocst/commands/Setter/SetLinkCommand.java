@@ -1,6 +1,7 @@
 package de.mariocst.commands.Setter;
 
 import de.mariocst.MarioMain;
+import de.mariocst.utils.Config;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SetLinkCommand implements CommandExecutor {
-    public static String Link  = "Kein Link definiert";
+    public static String Link = "Kein Link ist definiert!";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -21,9 +22,12 @@ public class SetLinkCommand implements CommandExecutor {
                 }
                 Link = msg;
 
-                MarioMain.INSTANCE.log("Der Discord Link ist nun: " + Link);
+                Config config = MarioMain.getInstance().getConfiguration();
+
+                config.getConfig().set("link", Link);
+                MarioMain.getInstance().log("Der Discord Link ist nun: " + Link);
             } else {
-                MarioMain.INSTANCE.log("§cUsage: §e/setlink <Link>");
+                MarioMain.getInstance().log("§cUsage: §e/setlink <Link>");
             }
             return false;
         }
@@ -36,12 +40,15 @@ public class SetLinkCommand implements CommandExecutor {
                 }
                 Link = msg;
 
-                sender.sendMessage(MarioMain.PREFIX + "Der Discord Link ist nun: " + Link);
+                Config config = MarioMain.getInstance().getConfiguration();
+
+                config.getConfig().set("link", Link);
+                sender.sendMessage(MarioMain.getPrefix() + "Der Discord Link ist nun: " + Link);
             } else {
                 sender.sendMessage("§cUsage: §e/setlink <Link>");
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

@@ -1,21 +1,19 @@
-package de.mariocst.commands.Player;
+package de.mariocst.commands.Inventory;
 
 import de.mariocst.MarioMain;
-import de.mariocst.backpack.Backpack;
 import de.mariocst.backpack.BackpackLarge;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class BackpackLargeCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MarioMain.PREFIX + "Dieser Command geht nur InGame!");
+            sender.sendMessage(MarioMain.getPrefix() + "Dieser Command geht nur InGame!");
             return true;
         } else {
             Player player = (Player) sender;
@@ -26,7 +24,7 @@ public class BackpackLargeCommand implements CommandExecutor {
                 player.openInventory(backpackLarge.getInventory());
             }
             else {
-                sender.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+                sender.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
             }
         }

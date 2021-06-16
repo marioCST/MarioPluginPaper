@@ -13,7 +13,7 @@ public class DieCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Du bist gestorben. Warte... Du bist eine Konsole!");
+            MarioMain.getInstance().log("Du bist gestorben. Warte... Du bist eine Konsole!");
             return true;
         }
 
@@ -21,9 +21,9 @@ public class DieCommand implements CommandExecutor {
 
         if(player.hasPermission("mario.die") || player.hasPermission("*") || player.isOp()) {
             player.setHealth(0d);
-            player.sendMessage(MarioMain.PREFIX + "Du bist gestorben.");
+            player.sendMessage(MarioMain.getPrefix() + "Du bist gestorben.");
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return true;

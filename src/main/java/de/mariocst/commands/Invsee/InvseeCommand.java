@@ -11,7 +11,7 @@ public class InvseeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Bitte führe den Command InGame aus!");
+            MarioMain.getInstance().log("Bitte führe den Command InGame aus!");
             return false;
         }
 
@@ -25,7 +25,7 @@ public class InvseeCommand implements CommandExecutor {
                         Player t = player.getServer().getPlayer(args[0]);
                         if (t != null) {
                             if (t.getName().equals(player.getName())) {
-                                sender.sendMessage(MarioMain.PREFIX + "Du kannst doch wohl noch dein eigenes Inventar öffnen xD");
+                                sender.sendMessage(MarioMain.getPrefix() + "Du kannst doch wohl noch dein eigenes Inventar öffnen xD");
                                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                             }
                             else {
@@ -33,28 +33,28 @@ public class InvseeCommand implements CommandExecutor {
                             }
                         }
                         else {
-                            sender.sendMessage(MarioMain.PREFIX + nullp);
+                            sender.sendMessage(MarioMain.getPrefix() + nullp);
                             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                         }
                     }
                     catch (NullPointerException e) {
                         e.printStackTrace();
-                        sender.sendMessage(MarioMain.PREFIX + nullp);
+                        sender.sendMessage(MarioMain.getPrefix() + nullp);
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.PREFIX + usage);
+                    sender.sendMessage(MarioMain.getPrefix() + usage);
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                sender.sendMessage(MarioMain.PREFIX + usage);
+                sender.sendMessage(MarioMain.getPrefix() + usage);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

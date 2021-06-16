@@ -1,29 +1,26 @@
-package de.mariocst.commands.Util;
+package de.mariocst.commands.Others;
 
 import de.mariocst.MarioMain;
-import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Date;
-
-public class DateCommand implements CommandExecutor {
+public class LolCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Date date = new Date();
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log(MarioMain.PREFIX + "Es ist gerade " + ChatColor.GOLD + date.toString());
+            Bukkit.broadcastMessage(MarioMain.getPrefix() + "§a§lLOL");
             return false;
         }
 
         Player player = (Player) sender;
-        if(player.hasPermission("mario.date") || player.hasPermission("*") || player.isOp()) {
-            sender.sendMessage(MarioMain.PREFIX + "Es ist gerade " + ChatColor.GOLD + date.toString());
+        if(player.hasPermission("mario.lol") || player.hasPermission("*") || player.isOp()) {
+            Bukkit.broadcastMessage(MarioMain.getPrefix() + "§a§lLOL");
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

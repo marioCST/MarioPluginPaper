@@ -6,13 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class RealnameCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("InDev");
+            MarioMain.getInstance().log("InDev");
         } else {
             Player player = (Player) sender;
 
@@ -25,33 +24,33 @@ public class RealnameCommand implements CommandExecutor {
                         try {
                             if (null != t) {
                                 if (t.getName().equals(args[0])) {
-                                    sender.sendMessage(MarioMain.PREFIX + "Dieser Spieler ist NICHT genickt!");
+                                    sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler ist NICHT genickt!");
                                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                                 } else {
-                                    sender.sendMessage(MarioMain.PREFIX + "Der Echte Name von " + args[0] + " ist: " + t.getName());
+                                    sender.sendMessage(MarioMain.getPrefix() + "Der Echte Name von " + args[0] + " ist: " + t.getName());
                                 }
                             } else  {
-                                sender.sendMessage(MarioMain.PREFIX + "java.lang.NullPointerException lol");
+                                sender.sendMessage(MarioMain.getPrefix() + "java.lang.NullPointerException lol");
                                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                             }
                         } catch (NullPointerException e) {
-                            sender.sendMessage(MarioMain.PREFIX + "java.lang.NullPointerException lol");
+                            sender.sendMessage(MarioMain.getPrefix() + "java.lang.NullPointerException lol");
                             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                             e.printStackTrace();
                         }
                     } else if (args.length == 0) {
-                        sender.sendMessage(MarioMain.PREFIX + "Bitte gib den Nickname an.");
+                        sender.sendMessage(MarioMain.getPrefix() + "Bitte gib den Nickname an.");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                     } else {
-                        sender.sendMessage(MarioMain.PREFIX + "§cBitte wähle einen gültigen Namen!");
+                        sender.sendMessage(MarioMain.getPrefix() + "§cBitte wähle einen gültigen Namen!");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                     }
                 } else {
-                    sender.sendMessage(MarioMain.PREFIX + "InDev");
+                    sender.sendMessage(MarioMain.getPrefix() + "InDev");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                 }
             } else {
-                sender.sendMessage(MarioMain.PREFIX + "§cKeine Rechte!");
+                sender.sendMessage(MarioMain.getPrefix() + "§cKeine Rechte!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
             }
         }

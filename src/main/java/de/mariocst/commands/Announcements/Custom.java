@@ -24,12 +24,12 @@ public class Custom implements CommandExecutor {
                     msg = msg + args[i] + " ";
                 }
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
                 while (schleife1< 5) {
                     schleife1++;
 
-                    Bukkit.broadcastMessage(MarioMain.PREFIX + msg.replaceAll("&", "§"));
-                    Bukkit.broadcastMessage(MarioMain.PREFIX);
+                    Bukkit.broadcastMessage(MarioMain.getPrefix() + msg.replaceAll("&", "§"));
+                    Bukkit.broadcastMessage(MarioMain.getPrefix());
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
@@ -50,12 +50,12 @@ public class Custom implements CommandExecutor {
                     msg = msg + args[i] + " ";
                 }
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
                 while (schleife2< 5) {
                     schleife2++;
 
-                    Bukkit.broadcastMessage(MarioMain.PREFIX + msg.replaceAll("&", "§"));
-                    Bukkit.broadcastMessage(MarioMain.PREFIX);
+                    Bukkit.broadcastMessage(MarioMain.getPrefix() + msg.replaceAll("&", "§"));
+                    Bukkit.broadcastMessage(MarioMain.getPrefix());
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
@@ -66,7 +66,7 @@ public class Custom implements CommandExecutor {
                 sender.sendMessage("§cUsage: §e/broadcast5 <Message>");
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

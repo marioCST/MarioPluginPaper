@@ -18,9 +18,9 @@ public class BroadcastCommand implements CommandExecutor {
                     msg = msg + args[i] + " ";
                 }
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
-                Bukkit.broadcastMessage(MarioMain.PREFIX + msg.replaceAll("&", "§"));
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + msg.replaceAll("&", "§"));
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
             } else {
                 sender.sendMessage("§cUsage: §e/broadcast <Message>");
             }
@@ -35,14 +35,14 @@ public class BroadcastCommand implements CommandExecutor {
                     msg = msg + args[i] + " ";
                 }
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
-                Bukkit.broadcastMessage(MarioMain.PREFIX + msg.replaceAll("&", "§"));
-                Bukkit.broadcastMessage(MarioMain.PREFIX);
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + msg.replaceAll("&", "§"));
+                Bukkit.broadcastMessage(MarioMain.getPrefix());
             } else {
                 sender.sendMessage("§cUsage: §e/broadcast <Message>");
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

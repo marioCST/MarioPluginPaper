@@ -19,7 +19,7 @@ public class ChatClearCommand implements CommandExecutor {
                 schleife1++;
                 Bukkit.broadcastMessage("   ");
             }
-            Bukkit.broadcastMessage(MarioMain.PREFIX + "Die Konsole hat den Chat gecleart!");
+            Bukkit.broadcastMessage(MarioMain.getPrefix() + "Die Konsole hat den Chat gecleart!");
             return false;
         }
 
@@ -29,9 +29,9 @@ public class ChatClearCommand implements CommandExecutor {
                 schleife2++;
                 Bukkit.broadcastMessage("   ");
             }
-            Bukkit.broadcastMessage(MarioMain.PREFIX + player.getDisplayName() + " hat den Chat gecleart!");
+            Bukkit.broadcastMessage(MarioMain.getPrefix() + player.getDisplayName() + " hat den Chat gecleart!");
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;

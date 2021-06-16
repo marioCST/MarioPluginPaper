@@ -10,9 +10,8 @@ import org.bukkit.entity.Player;
 public class NickCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Dieser Command kann nur InGame ausgeführt werden!");
+            MarioMain.getInstance().log("Dieser Command kann nur InGame ausgeführt werden!");
             return true;
         }
 
@@ -23,32 +22,34 @@ public class NickCommand implements CommandExecutor {
                 if (args[0].length() < 16) {
                     for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                         if (args[0].equals(t.getName()) && !args[0].equals(player.getName())) {
-                            sender.sendMessage(MarioMain.PREFIX + "Bitte ''fake'' keine Spieler!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Bitte ''fake'' keine Spieler!");
                         }
                         else if (args[0].equals(player.getName())) {
-                            sender.sendMessage(MarioMain.PREFIX + "/unnick");
+                            sender.sendMessage(MarioMain.getPrefix() + "/unnick");
                         }
                         else if (args[0].equals(t.getCustomName())) {
-                            sender.sendMessage(MarioMain.PREFIX + "Jemand hat sich bereits " + args[0] + " genannt!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Jemand hat sich bereits " + args[0] + " genannt!");
                         }
                         else {
                             String newNick = String.join(" ",  args);
+
                             player.setDisplayName(newNick);
                             player.setPlayerListName(newNick);
                             player.setCustomName(newNick);
-                            sender.sendMessage(MarioMain.PREFIX + "Dein Nickname wurde erfolgreich zu " + newNick + " geändert!");
+
+                            sender.sendMessage(MarioMain.getPrefix() + "Dein Nickname wurde erfolgreich zu " + newNick + " geändert!");
                         }
                     }
                 } else {
-                    sender.sendMessage(MarioMain.PREFIX + "Bitte wähle einen Namen, der kürzer als 16 Zeichen ist!");
+                    sender.sendMessage(MarioMain.getPrefix() + "Bitte wähle einen Namen, der kürzer als 16 Zeichen ist!");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                 }
             } else {
-                sender.sendMessage(MarioMain.PREFIX + "Bitte gib einen Nickname ein, oder suche dir einen, der keine Leerzeichen hat!");
+                sender.sendMessage(MarioMain.getPrefix() + "Bitte gib einen Nickname ein, oder suche dir einen, der keine Leerzeichen hat!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return true;

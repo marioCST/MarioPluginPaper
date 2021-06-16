@@ -12,7 +12,7 @@ public class DayCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!(sender instanceof Player)) {
-            MarioMain.INSTANCE.log("Dieser Command kann leider nur InGame ausgeführt werden!");
+            MarioMain.getInstance().log("Dieser Command kann leider nur InGame ausgeführt werden!");
             return true;
         }
 
@@ -20,9 +20,9 @@ public class DayCommand implements CommandExecutor {
 
         if(player.hasPermission("mario.day") || player.hasPermission("*") || player.isOp()) {
             player.getWorld().setTime(0);
-            player.sendMessage(MarioMain.PREFIX + "Die Zeit wurde auf Tag gestellt!");
+            player.sendMessage(MarioMain.getPrefix() + "Die Zeit wurde auf Tag gestellt!");
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return true;

@@ -1,4 +1,4 @@
-package de.mariocst.commands.Util;
+package de.mariocst.commands.Others;
 
 import de.mariocst.MarioMain;
 import de.mariocst.timer.Timer;
@@ -7,12 +7,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class TimerCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
@@ -28,24 +27,24 @@ public class TimerCommand implements CommandExecutor {
                         Timer timer = MarioMain.getInstance().getTimer();
 
                         if (timer.isRunning()) {
-                            sender.sendMessage(MarioMain.PREFIX + "§cDer Timer läuft bereits!");
+                            sender.sendMessage(MarioMain.getPrefix() + "§cDer Timer läuft bereits!");
                             break;
                         }
 
                         timer.setRunning(true);
-                        sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde gestartet!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde gestartet!");
                         break;
                     }
                     case "pause": {
                         Timer timer = MarioMain.getInstance().getTimer();
 
                         if (!timer.isRunning()) {
-                            sender.sendMessage(MarioMain.PREFIX + "§cDer Timer läuft nicht.");
+                            sender.sendMessage(MarioMain.getPrefix() + "§cDer Timer läuft nicht.");
                             break;
                         }
 
                         timer.setRunning(false);
-                        sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde gestoppt!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde gestoppt!");
                         break;
                     }
                     case "time": {
@@ -59,9 +58,9 @@ public class TimerCommand implements CommandExecutor {
 
                             timer.setRunning(false);
                             timer.setTime(Integer.parseInt(args[1]));
-                            sender.sendMessage(MarioMain.PREFIX + "Die Zeit wurde auf " + args[1] + " gesetzt!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Die Zeit wurde auf " + args[1] + " gesetzt!");
                         } catch (NumberFormatException e) {
-                            sender.sendMessage(MarioMain.PREFIX + "§4Dein Parameter 2 muss eine Zahl sein!");
+                            sender.sendMessage(MarioMain.getPrefix() + "§4Dein Parameter 2 muss eine Zahl sein!");
                             e.printStackTrace();
                         }
                         break;
@@ -71,7 +70,7 @@ public class TimerCommand implements CommandExecutor {
 
                         timer.setRunning(false);
                         timer.setTime(0);
-                        sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde resettet!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde resettet!");
                         break;
                     }
                     default: {
@@ -80,7 +79,7 @@ public class TimerCommand implements CommandExecutor {
                     }
                 }
             } else {
-                player.sendMessage(MarioMain.PREFIX + "§4Keine Rechte!");
+                player.sendMessage(MarioMain.getPrefix() + "§4Keine Rechte!");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
             }
         } else {
@@ -94,24 +93,24 @@ public class TimerCommand implements CommandExecutor {
                     Timer timer = MarioMain.getInstance().getTimer();
 
                     if (timer.isRunning()) {
-                        sender.sendMessage(MarioMain.PREFIX + "§cDer Timer läuft bereits!");
+                        sender.sendMessage(MarioMain.getPrefix() + "§cDer Timer läuft bereits!");
                         break;
                     }
 
                     timer.setRunning(true);
-                    sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde gestartet!");
+                    sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde gestartet!");
                     break;
                 }
                 case "pause": {
                     Timer timer = MarioMain.getInstance().getTimer();
 
                     if (!timer.isRunning()) {
-                        sender.sendMessage(MarioMain.PREFIX + "§cDer Timer läuft nicht.");
+                        sender.sendMessage(MarioMain.getPrefix() + "§cDer Timer läuft nicht.");
                         break;
                     }
 
                     timer.setRunning(false);
-                    sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde gestoppt!");
+                    sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde gestoppt!");
                     break;
                 }
                 case "time": {
@@ -125,9 +124,9 @@ public class TimerCommand implements CommandExecutor {
 
                         timer.setRunning(false);
                         timer.setTime(Integer.parseInt(args[1]));
-                        sender.sendMessage(MarioMain.PREFIX + "Die Zeit wurde auf " + args[1] + " gesetzt!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Die Zeit wurde auf " + args[1] + " gesetzt!");
                     } catch (NumberFormatException e) {
-                        sender.sendMessage(MarioMain.PREFIX + "§4Dein Parameter 2 muss eine Zahl sein!");
+                        sender.sendMessage(MarioMain.getPrefix() + "§4Dein Parameter 2 muss eine Zahl sein!");
                         e.printStackTrace();
                     }
                     break;
@@ -137,7 +136,7 @@ public class TimerCommand implements CommandExecutor {
 
                     timer.setRunning(false);
                     timer.setTime(0);
-                    sender.sendMessage(MarioMain.PREFIX + "Der Timer wurde resettet!");
+                    sender.sendMessage(MarioMain.getPrefix() + "Der Timer wurde resettet!");
                     break;
                 }
                 default: {

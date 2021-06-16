@@ -18,7 +18,7 @@ public class Kick implements CommandExecutor {
             while (schleife1 < 5) {
                 schleife1++;
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX + "§e§lALLE WERDEN GEKICKT! BITTE NACH KURZER ZEIT REJOINEN! NICHT DIREKT!");
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + "§e§lALLE WERDEN GEKICKT! BITTE NACH KURZER ZEIT REJOINEN! NICHT DIREKT!");
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -33,7 +33,7 @@ public class Kick implements CommandExecutor {
             while (schleife2 < 5) {
                 schleife2++;
 
-                Bukkit.broadcastMessage(MarioMain.PREFIX + "§e§lALLE WERDEN GEKICKT! BITTE NACH KURZER ZEIT REJOINEN! NICHT DIREKT!");
+                Bukkit.broadcastMessage(MarioMain.getPrefix() + "§e§lALLE WERDEN GEKICKT! BITTE NACH KURZER ZEIT REJOINEN! NICHT DIREKT!");
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class Kick implements CommandExecutor {
                 }
             }
         } else {
-            player.sendMessage(MarioMain.PREFIX + "Keine Rechte!");
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
         }
         return false;
