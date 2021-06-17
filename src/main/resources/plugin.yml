@@ -153,6 +153,14 @@ commands:
   sign:
     description: Signiert ein Item in deiner Hand!
     permission: mario.sign
+  worldtp:
+    description: Teleportiere dich in eine Welt!
+    aliases: [ "wtp" ]
+    permission: mario.worldtp
+  worldcreate:
+    description: Erstelle eine Welt!
+    aliases: [ "wc" ]
+    permission: mario.worldcreate
 
 permissions:
   mario.*:
@@ -198,6 +206,8 @@ permissions:
       mario.storeinventory: true
       mario.troll: true
       mario.sign: true
+      mario.worldtp: true
+      mario.worldcreate: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -321,4 +331,10 @@ permissions:
     default: op
   mario.sign:
     description: Rechte für den /sign Command!
+    default: op
+  mario.worldtp:
+    description: Rechte für den /worldtp Command!
+    default: op
+  mario.worldcreate:
+    description: Rechte für den /worldcreate Command!
     default: op

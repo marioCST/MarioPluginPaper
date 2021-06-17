@@ -22,6 +22,8 @@ import de.mariocst.commands.Storing.RestoreInventoryCommand;
 import de.mariocst.commands.Storing.StoreInventoryCommand;
 import de.mariocst.commands.World.DayCommand;
 import de.mariocst.commands.World.NightCommand;
+import de.mariocst.commands.World.WorldCreateCommand;
+import de.mariocst.commands.World.WorldTPCommand;
 import de.mariocst.listeners.JoinListener;
 import de.mariocst.timer.Timer;
 import de.mariocst.utils.Backpacks;
@@ -181,6 +183,8 @@ public final class MarioMain extends JavaPlugin {
         //World
         Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
         Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
+        Bukkit.getPluginCommand("worldcreate").setExecutor(new WorldCreateCommand());
+        Bukkit.getPluginCommand("worldtp").setExecutor(new WorldTPCommand());
 
     }
 
