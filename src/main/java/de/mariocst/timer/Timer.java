@@ -12,17 +12,33 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Timer {
 
     private boolean running;
-    private int time;
+    private int seconds;
+    private int minutes;
+    private int hours;
 
     public Timer() {
         Config config = MarioMain.getInstance().getConfiguration();
 
         this.running = false;
 
-        if (config.getConfig().contains("timer.time")) {
-            this.time = config.getConfig().getInt("timer.time");
+        if (config.getConfig().contains("timer.seconds")) {
+            this.seconds = config.getConfig().getInt("timer.seconds");
         } else {
-            this.time = 0;
+            this.seconds = 0;
+        }
+
+        if (config.getConfig().contains("timer.minutes")) {
+            this.minutes = config.getConfig().getInt("timer.minutes");
+        }
+        else {
+            this.minutes = 0;
+        }
+
+        if (config.getConfig().contains("timer.hours")) {
+            this.hours = config.getConfig().getInt("timer.hours");
+        }
+        else {
+            this.hours = 0;
         }
 
         run();
@@ -36,12 +52,28 @@ public class Timer {
         this.running = running;
     }
 
-    public int getTime() {
-        return time;
+    public int getSeconds() {
+        return seconds;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setSeconds(int time) {
+        this.seconds = time;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public void sendActionBar() {
@@ -53,15 +85,32 @@ public class Timer {
                 continue;
             }
 
+            String secondsString = String.valueOf(getSeconds());
+            String minutesString = String.valueOf(getMinutes());
+            String hoursString = String.valueOf(getHours());
 
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + getTime()));
+            if (getSeconds() < 10) {
+                secondsString = "0" + getSeconds();
+            }
+
+            if (minutes < 10) {
+                minutesString = "0" + getMinutes();
+            }
+
+            if (hours < 10) {
+                hoursString = "0" + getHours();
+            }
+
+            player.sendActionBar(new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + hoursString + ":" + minutesString + ":" + secondsString));
         }
     }
 
     public void save() {
         Config config = MarioMain.getInstance().getConfiguration();
 
-        config.getConfig().set("timer.time", time);
+        config.getConfig().set("timer.seconds", seconds);
+        config.getConfig().set("timer.minutes", minutes);
+        config.getConfig().set("timer.hours", hours);
     }
 
     private void run() {
@@ -75,7 +124,27 @@ public class Timer {
                     return;
                 }
 
-                setTime(getTime() + 1);
+                setSeconds(getSeconds() + 1);
+
+                if (getSeconds() == 60) {
+                    setSeconds(0);
+                    setMinutes(getMinutes() + 1);
+                }
+
+                if (getMinutes() == 60) {
+                    setMinutes(0);
+                    setHours(getHours() + 1);
+                }
+
+                if (getSeconds() > 60) {
+                    setMinutes(getMinutes() + getSeconds() / 60);
+                    setSeconds(getSeconds() % 60);
+                }
+
+                if (getMinutes() > 60) {
+                    setHours(getHours() + getMinutes() / 60);
+                    setMinutes(getMinutes() % 60);
+                }
             }
         }.runTaskTimer(MarioMain.getInstance(), 20, 20);
     }
