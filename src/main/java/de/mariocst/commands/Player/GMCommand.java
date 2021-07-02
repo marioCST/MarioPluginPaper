@@ -33,7 +33,7 @@ public class GMCommand implements CommandExecutor {
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Adventure gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Adventure gesetzt worden!");
                             } else if (msg.equals("3") || msg.equalsIgnoreCase("spectator") || msg.equalsIgnoreCase("sp")) {
-                                t.setGameMode(GameMode.ADVENTURE);
+                                t.setGameMode(GameMode.SPECTATOR);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Spectator gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Spectator gesetzt worden!");
                             } else {
