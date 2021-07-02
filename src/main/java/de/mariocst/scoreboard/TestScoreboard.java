@@ -27,8 +27,6 @@ public class TestScoreboard extends ScoreboardBuilder {
         }
 
         setScore(ChatColor.GOLD.toString(), 1);
-
-
     }
 
     @Override
@@ -41,15 +39,9 @@ public class TestScoreboard extends ScoreboardBuilder {
             @Override
             public void run() {
                 switch (socialId) {
-                    case 0:
-                        setScore(ChatColor.GREEN + "Hi :D", 0);
-                        break;
-                    case 1:
-                        setScore(ChatColor.DARK_RED + "Was geht?", 0);
-                        break;
-                    case 2:
-                        setScore(ChatColor.BLACK + "Lel" , 0);
-                        break;
+                    case 0 -> setScore(ChatColor.GREEN + "Hi :D", 0);
+                    case 1 -> setScore(ChatColor.DARK_RED + "Was geht?", 0);
+                    case 2 -> setScore(ChatColor.BLACK + "Lel", 0);
                 }
 
                 socialId++;
