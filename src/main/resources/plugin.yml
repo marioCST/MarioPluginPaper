@@ -164,7 +164,7 @@ commands:
 
 permissions:
   mario.*:
-    description: Alle Rechte zu diesem Trash PlugIn!
+    description: Alle Rechte zu diesem Plugin!
     children:
       mario.reload: true
       mario.stop: true
