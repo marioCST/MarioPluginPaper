@@ -30,7 +30,6 @@ public class InventoryListener implements Listener {
 
         for (Player trolled : MarioMain.getInstance().invTroll) {
             event.setCancelled(true);
-            event.getItemDrop().setCanPlayerPickup(false);
             event.getItemDrop().remove();
         }
     }

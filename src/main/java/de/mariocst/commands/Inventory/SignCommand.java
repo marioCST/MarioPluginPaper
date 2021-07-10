@@ -29,7 +29,7 @@ public class SignCommand implements CommandExecutor {
 
                     try {
                         if (player.getInventory().getItem(player.getInventory().getHeldItemSlot()) != null) {
-                            player.getInventory().getItem(player.getInventory().getHeldItemSlot()).setLore(Collections.singletonList(msg.replaceAll("&", "§")));
+                            //player.getInventory().getItem(player.getInventory().getHeldItemSlot()).setItemMeta(Collections.singletonList(msg.replaceAll("&", "§")));
                         }
                         else {
                             player.sendMessage(MarioMain.getPrefix() + "Bitte halte ein Item in deiner Hand!");

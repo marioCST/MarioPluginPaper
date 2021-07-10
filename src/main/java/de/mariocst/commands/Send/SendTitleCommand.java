@@ -24,7 +24,7 @@ public class SendTitleCommand implements CommandExecutor {
                                 msg = msg + args[i] + " ";
                             }
 
-                            t.sendTitle(new Title(msg));
+                            t.sendTitle(msg, "");
                         }
                     }
                     catch (NullPointerException e) {
@@ -54,7 +54,7 @@ public class SendTitleCommand implements CommandExecutor {
                                 msg = msg + args[i] + " ";
                             }
 
-                            t.sendTitle(new Title(msg));
+                            t.sendTitle(msg, "");
                         }
                     }
                     catch (NullPointerException e) {

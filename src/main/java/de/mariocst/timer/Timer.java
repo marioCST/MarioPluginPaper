@@ -101,7 +101,7 @@ public class Timer {
                 hoursString = "0" + getHours();
             }
 
-            player.sendActionBar(new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + hoursString + ":" + minutesString + ":" + secondsString));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + hoursString + ":" + minutesString + ":" + secondsString));
         }
     }
 

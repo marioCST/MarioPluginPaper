@@ -1,6 +1,9 @@
 package de.mariocst.commands.Send;
 
 import de.mariocst.MarioMain;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +26,7 @@ public class SendActionBarCommand implements CommandExecutor {
                                 msg = msg + args[i] + " ";
                             }
 
-                            t.sendActionBar(msg);
+                            t.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
                         }
                     }
                     catch (NullPointerException e) {
@@ -53,7 +56,7 @@ public class SendActionBarCommand implements CommandExecutor {
                                 msg = msg + args[i] + " ";
                             }
 
-                            t.sendActionBar(msg);
+                            t.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
                         }
                     }
                     catch (NullPointerException e) {

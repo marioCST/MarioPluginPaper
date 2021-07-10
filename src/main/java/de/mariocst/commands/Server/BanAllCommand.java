@@ -1,12 +1,16 @@
 package de.mariocst.commands.Server;
 
 import de.mariocst.MarioMain;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.time.Instant;
+import java.util.Date;
 
 public class BanAllCommand implements CommandExecutor {
     @Override
@@ -21,7 +25,7 @@ public class BanAllCommand implements CommandExecutor {
                     }
                     else {
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
-                            t.banPlayer("Banned by Admin");
+                            MarioMain.getInstance().getServer().getBanList(BanList.Type.NAME).addBan(t.getName(), "Banned by Admin", Date.from(Instant.ofEpochSecond(7257600000L)), "Console");
                         }
 
                         Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Alle Spieler gebannt!");
@@ -40,7 +44,7 @@ public class BanAllCommand implements CommandExecutor {
                         }
 
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
-                            t.banPlayer(reason);
+                            MarioMain.getInstance().getServer().getBanList(BanList.Type.NAME).addBan(t.getName(), reason, Date.from(Instant.ofEpochSecond(7257600000L)), "Console");
                         }
                         Bukkit.getConsoleSender().sendMessage(MarioMain.getPrefix() + "Alle Spieler mit dem Grund " + reason + " gebannt!");
                     }
@@ -69,7 +73,7 @@ public class BanAllCommand implements CommandExecutor {
                     else {
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                             if (t != sender) {
-                                t.banPlayer("Banned by Admin");
+                                MarioMain.getInstance().getServer().getBanList(BanList.Type.NAME).addBan(t.getName(), "Banned by Admin", Date.from(Instant.ofEpochSecond(7257600000L)), "Console");
                             }
                         }
 
@@ -91,7 +95,7 @@ public class BanAllCommand implements CommandExecutor {
 
                         for (Player t : MarioMain.getInstance().getServer().getOnlinePlayers()) {
                             if (t != sender) {
-                                t.banPlayer(reason);
+                                MarioMain.getInstance().getServer().getBanList(BanList.Type.NAME).addBan(t.getName(), reason, Date.from(Instant.ofEpochSecond(7257600000L)), "Console");
                             }
                         }
                         sender.sendMessage(MarioMain.getPrefix() + "Alle Spieler mit dem Grund " + reason + " gebannt!");
