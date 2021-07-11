@@ -133,7 +133,6 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("backpacklarge").setExecutor(new BackpackLargeCommand());
         Bukkit.getPluginCommand("clearenderchest").setExecutor(new ClearEnderChestCommand());
         Bukkit.getPluginCommand("clearinventory").setExecutor(new ClearInventoryCommand());
-        //Bukkit.getPluginCommand("sign").setExecutor(new SignCommand());
 
         //Invsee
         Bukkit.getPluginCommand("enderinvsee").setExecutor(new EnderInvseeCommand());
