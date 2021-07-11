@@ -150,9 +150,6 @@ commands:
   troll:
     description: Trolle jemandem mit einem Explosions Paket haha
     permission: mario.troll
-  sign:
-    description: Signiert ein Item in deiner Hand!
-    permission: mario.sign
   worldtp:
     description: Teleportiere dich in eine Welt!
     aliases: [ "wtp" ]
@@ -161,6 +158,10 @@ commands:
     description: Erstelle eine Welt!
     aliases: [ "wc" ]
     permission: mario.worldcreate
+  worldlist:
+    description: Liste alle Welten!
+    aliases: [ "wl" ]
+    permission: mario.worldlist
 
 permissions:
   mario.*:
@@ -205,9 +206,9 @@ permissions:
       mario.restoreinventory: true
       mario.storeinventory: true
       mario.troll: true
-      mario.sign: true
       mario.worldtp: true
       mario.worldcreate: true
+      mario.worldlist: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -329,12 +330,12 @@ permissions:
   mario.troll:
     description: Rechte für den /troll Command!
     default: op
-  mario.sign:
-    description: Rechte für den /sign Command!
-    default: op
   mario.worldtp:
     description: Rechte für den /worldtp Command!
     default: op
   mario.worldcreate:
     description: Rechte für den /worldcreate Command!
+    default: op
+  mario.worldlist:
+    description: Rechte für den /worldlist Command!
     default: op

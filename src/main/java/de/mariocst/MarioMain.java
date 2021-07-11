@@ -178,6 +178,7 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
         Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
         Bukkit.getPluginCommand("worldcreate").setExecutor(new WorldCreateCommand());
+        Bukkit.getPluginCommand("worldlist").setExecutor(new WorldListCommand());
         Bukkit.getPluginCommand("worldtp").setExecutor(new WorldTPCommand());
 
     }

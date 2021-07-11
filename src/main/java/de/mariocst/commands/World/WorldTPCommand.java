@@ -24,7 +24,7 @@ public class WorldTPCommand implements CommandExecutor {
                         player.teleport(new Location(MarioMain.getInstance().getServer().getWorld(args[0]), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ()));
                     }
                     else {
-                        player.sendMessage(MarioMain.getPrefix() + "Die Welt " + args[0] + " existiert nicht! Alle Welten: " + MarioMain.getInstance().getServer().getWorlds());
+                        player.sendMessage(MarioMain.getPrefix() + "Die Welt " + args[0] + " existiert nicht! Alle Welten mit /worldlist");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
                     }
                 }
