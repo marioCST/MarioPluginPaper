@@ -27,7 +27,7 @@ import java.util.List;
 
 public final class MarioMain extends JavaPlugin {
 
-    private static String prefix = "§8[§6marioCST.de§8] §b";
+    private static String prefix;
     private static MarioMain instance;
 
     private BackpackManager backpackManager;
@@ -38,6 +38,8 @@ public final class MarioMain extends JavaPlugin {
     private BackpacksLarge backpacksLarge;
     private BackpacksStored backpacksStored;
     private Timer timer;
+    private Prefix prefixConfig;
+    private DiscordLink discordLink;
 
     public List<Player> invTroll = new ArrayList<>();
 
@@ -59,25 +61,20 @@ public final class MarioMain extends JavaPlugin {
         this.register();
         listenerRegistration();
 
+        prefixConfig = new Prefix();
+        discordLink = new DiscordLink();
         timer = new Timer();
         backpackManager = new BackpackManager();
         backpackManagerLarge = new BackpackManagerLarge();
         backpackManagerStored = new BackpackManagerStored();
 
-        log("marioCST's PlugIn geladen!");
+        log("marioCST's Plugin geladen!");
     }
 
     @Override
     public void onDisable() {
-        log("marioCST's PlugIn entladen!");
-        timer.save();
-        backpackManager.save();
-        backpackManagerLarge.save();
-        backpackManagerStored.save();
-        backpacks.save();
-        backpacksLarge.save();
-        backpacksStored.save();
-        config.save();
+        log("marioCST's Plugin entladen!");
+        saveConfigs();
     }
 
     public Config getConfiguration() {
@@ -111,8 +108,38 @@ public final class MarioMain extends JavaPlugin {
         pluginManager.registerEvents(new JoinListener(), this);
     }
 
+    public void saveConfigs() {
+        timer.save();
+        prefixConfig.save();
+        discordLink.save();
+        backpackManager.save();
+        backpackManagerLarge.save();
+        backpackManagerStored.save();
+        backpacks.save();
+        backpacksLarge.save();
+        backpacksStored.save();
+        config.save();
+    }
+
+    public void reloadConfigs() {
+        backpacks = new Backpacks();
+        backpacksLarge = new BackpacksLarge();
+        backpacksStored = new BackpacksStored();
+        config = new Config();
+        timer.reload();
+        prefixConfig.reload();
+        discordLink.reload();
+        backpackManager.load();
+        backpackManagerLarge.load();
+        backpackManagerStored.load();
+    }
+
     public void log(String text) {
         Bukkit.getConsoleSender().sendMessage(getPrefix() + text);
+    }
+
+    public void warning(String text) {
+        getLogger().warning(getPrefix() + text);
     }
 
     private void register() {
@@ -164,10 +191,12 @@ public final class MarioMain extends JavaPlugin {
 
         //Server
         Bukkit.getPluginCommand("banall").setExecutor(new BanAllCommand());
+        Bukkit.getPluginCommand("config").setExecutor(new ConfigCommand());
         Bukkit.getPluginCommand("kickall").setExecutor(new KickAllCommand());
 
         //Setter
         Bukkit.getPluginCommand("setlink").setExecutor(new SetLinkCommand());
+        Bukkit.getPluginCommand("setprefix").setExecutor(new SetPrefixCommand());
 
         //Storing BETA
         Bukkit.getPluginCommand("backpackstored").setExecutor(new BackpackStoredCommand());
@@ -176,6 +205,7 @@ public final class MarioMain extends JavaPlugin {
 
         //World
         Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
+        Bukkit.getPluginCommand("forceloadchunk").setExecutor(new ForceLoadChunkCommand());
         Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
         Bukkit.getPluginCommand("worldcreate").setExecutor(new WorldCreateCommand());
         Bukkit.getPluginCommand("worldlist").setExecutor(new WorldListCommand());
@@ -189,6 +219,10 @@ public final class MarioMain extends JavaPlugin {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public Prefix getPrefixConfig() {
+        return prefixConfig;
     }
 
     public BackpackManager getBackpackManager() {

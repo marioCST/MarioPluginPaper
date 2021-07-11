@@ -1,9 +1,9 @@
-name: MarioPlugIn
+name: MarioPlugin
 version: ${project.version}
 main: de.mariocst.MarioMain
 api-version: 1.16
 authors: [ marioCST ]
-description: marioCSTs 1.16.5 PlugIn
+description: marioCSTs 1.16.5 Plugin
 
 commands:
   heal:
@@ -45,7 +45,7 @@ commands:
     aliases: ["bc5"]
     permission: mario.broadcast5
   discord:
-    description: Link zum definierten Discord. (MUSS IMMER MIT /setlink NACH JEDEM RESTART/RELOAD/STOP NEU DEFINIERT WERDEN!!!!)
+    description: Link zum definierten Discord.
     aliases: ["dc"]
     permission: mario.discord
   setlink:
@@ -162,6 +162,18 @@ commands:
     description: Liste alle Welten!
     aliases: [ "wl" ]
     permission: mario.worldlist
+  forceloadchunk:
+    description: Lasse einen Chunk immer geladen sein! Oder auch nicht.
+    aliases: [ "flc" ]
+    permission: mario.forceloadchunk
+  setprefix:
+    description: Ändere den Prefix dieses Plugins!
+    aliases: [ "sp" ]
+    permission: mario.setprefix
+  config:
+    description: Speichere oder lade alle Configs neu!
+    aliases: [ "c" ]
+    permission: mario.config
 
 permissions:
   mario.*:
@@ -209,6 +221,9 @@ permissions:
       mario.worldtp: true
       mario.worldcreate: true
       mario.worldlist: true
+      mario.forceloadchunk: true
+      mario.setprefix: true
+      mario.config: true
   mario.heal:
     description: Damit kannst du dich heilen.
     default: op
@@ -338,4 +353,13 @@ permissions:
     default: op
   mario.worldlist:
     description: Rechte für den /worldlist Command!
+    default: op
+  mario.forceloadchunk:
+    description: Rechte für den /forceloadchunk Command!
+    default: op
+  mario.setprefix:
+    description: Rechte für den /setprefix Command!
+    default: op
+  mario.config:
+    description: Rechte für den /config Command!
     default: op

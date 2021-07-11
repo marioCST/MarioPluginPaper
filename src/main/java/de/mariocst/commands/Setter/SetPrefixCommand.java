@@ -2,14 +2,16 @@ package de.mariocst.commands.Setter;
 
 import de.mariocst.MarioMain;
 import de.mariocst.utils.Config;
-import de.mariocst.utils.DiscordLink;
+import de.mariocst.utils.Prefix;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetLinkCommand implements CommandExecutor {
+public class SetPrefixCommand implements CommandExecutor {
+    private String prefix;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String msg = "";
@@ -19,28 +21,32 @@ public class SetLinkCommand implements CommandExecutor {
                 for(int i = 0; i < args.length; i++) {
                     msg = msg + args[i] + " ";
                 }
+                prefix = msg;
 
-                DiscordLink.getDiscordLink().setLink(msg);
-                MarioMain.getInstance().log("Der Discord Link ist nun: " + msg);
+                MarioMain.getInstance().log("Der Prefix ist nun: " + prefix);
+                MarioMain.setPrefix(prefix.replaceAll("&", "§"));
+                Prefix.getPrefixClass().setPrefix(prefix.replaceAll("&", "§"));
                 MarioMain.getInstance().saveConfigs();
             } else {
-                MarioMain.getInstance().log("§cUsage: §e/setlink <Link>");
+                MarioMain.getInstance().log("§cUsage: §e/setprefix <Prefix>");
             }
             return false;
         }
 
         Player player = (Player) sender;
-        if(player.hasPermission("mario.setlink") || player.hasPermission("*") || player.isOp()) {
+        if(player.hasPermission("mario.prefix") || player.hasPermission("*") || player.isOp()) {
             if (args.length >= 1) {
                 for(int i = 0; i < args.length; i++) {
                     msg = msg + args[i] + " ";
                 }
+                prefix = msg;
 
-                DiscordLink.getDiscordLink().setLink(msg);
-                sender.sendMessage(MarioMain.getPrefix() + "Der Discord Link ist nun: " + msg);
+                sender.sendMessage(MarioMain.getPrefix() + "Der Prefix ist nun: " + prefix);
+                MarioMain.setPrefix(prefix.replaceAll("&", "§"));
+                Prefix.getPrefixClass().setPrefix(prefix.replaceAll("&", "§"));
                 MarioMain.getInstance().saveConfigs();
             } else {
-                sender.sendMessage("§cUsage: §e/setlink <Link>");
+                sender.sendMessage("§cUsage: §e/setprefix <Prefix>");
             }
         } else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");

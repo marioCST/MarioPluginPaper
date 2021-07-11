@@ -29,7 +29,7 @@ public class BackpackManager {
         map.put(uuid, backpack);
     }
 
-    private void load() {
+    public void load() {
         Backpacks backpacks = MarioMain.getInstance().getBackpacks();
 
         List<String> uuids = backpacks.getBackpacks().getStringList("backpacks");

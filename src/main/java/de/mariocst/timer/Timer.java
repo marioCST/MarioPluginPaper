@@ -44,6 +44,34 @@ public class Timer {
         run();
     }
 
+    public void reload() {
+        Config config = MarioMain.getInstance().getConfiguration();
+
+        this.running = false;
+
+        if (config.getConfig().contains("timer.seconds")) {
+            this.seconds = config.getConfig().getInt("timer.seconds");
+        } else {
+            this.seconds = 0;
+        }
+
+        if (config.getConfig().contains("timer.minutes")) {
+            this.minutes = config.getConfig().getInt("timer.minutes");
+        }
+        else {
+            this.minutes = 0;
+        }
+
+        if (config.getConfig().contains("timer.hours")) {
+            this.hours = config.getConfig().getInt("timer.hours");
+        }
+        else {
+            this.hours = 0;
+        }
+
+        run();
+    }
+
     public boolean isRunning() {
         return running;
     }
