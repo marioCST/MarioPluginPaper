@@ -1,19 +1,20 @@
-Mario PlugIn for PaperSpigot/Spigot
+Mario Plugin für PaperSpigot/Spigot
 
 
--- How to use? --
+-- Wie benutze ich es? --
 
-Download everything. Open with IntelliJ (recommended) as a Maven Project. Use JDK 1.15.
-
-
--- What is allowed? --
-
-You can modify every class. Publishing is allowed too. You can do everything with it. Please make Credits :D
+Downloade alles. Öffne den Ordner Inhalt mit IntelliJ (empfohlen). Nutze das JDK 1.15.
 
 
--- What can I do, if I use Eclipse? --
+-- Was ist erlaubt? --
+
+Du darfst alles modifizieren, veröffentlichen und eigentlich alles machen, was du willst.
+Du MUSST aber Credits geben!
+
+
+--Was tun, wenn ich Eclipse nutze? --
 
 idk lol
 
 
-P.S.: Please share any issues!
+P.S.: Bitte teile Fehler und mache Pull Requests mit Bugfixes!
