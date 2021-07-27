@@ -15,7 +15,6 @@ import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Storing.*;
 import de.mariocst.commands.World.*;
 import de.mariocst.listeners.*;
-import de.mariocst.timer.*;
 import de.mariocst.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -37,7 +36,6 @@ public final class MarioMain extends JavaPlugin {
     private Backpacks backpacks;
     private BackpacksLarge backpacksLarge;
     private BackpacksStored backpacksStored;
-    private Timer timer;
     private Prefix prefixConfig;
     private DiscordLink discordLink;
 
@@ -63,7 +61,6 @@ public final class MarioMain extends JavaPlugin {
 
         prefixConfig = new Prefix();
         discordLink = new DiscordLink();
-        timer = new Timer();
         backpackManager = new BackpackManager();
         backpackManagerLarge = new BackpackManagerLarge();
         backpackManagerStored = new BackpackManagerStored();
@@ -109,7 +106,6 @@ public final class MarioMain extends JavaPlugin {
     }
 
     public void saveConfigs() {
-        timer.save();
         prefixConfig.save();
         discordLink.save();
         backpackManager.save();
@@ -126,7 +122,6 @@ public final class MarioMain extends JavaPlugin {
         backpacksLarge = new BackpacksLarge();
         backpacksStored = new BackpacksStored();
         config = new Config();
-        timer.reload();
         prefixConfig.reload();
         discordLink.reload();
         backpackManager.load();
@@ -170,7 +165,6 @@ public final class MarioMain extends JavaPlugin {
         Bukkit.getPluginCommand("discord").setExecutor(new DiscordCommand());
         Bukkit.getPluginCommand("enderchest").setExecutor(new ECCommand());
         Bukkit.getPluginCommand("lol").setExecutor(new LolCommand());
-        Bukkit.getPluginCommand("timer").setExecutor(new TimerCommand());
         Bukkit.getPluginCommand("troll").setExecutor(new TrollCommand());
 
         //Player
@@ -215,10 +209,6 @@ public final class MarioMain extends JavaPlugin {
 
     public static MarioMain getInstance() {
         return instance;
-    }
-
-    public Timer getTimer() {
-        return timer;
     }
 
     public Prefix getPrefixConfig() {
