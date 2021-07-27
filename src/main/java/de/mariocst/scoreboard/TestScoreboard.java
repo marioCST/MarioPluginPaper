@@ -9,7 +9,7 @@ public class TestScoreboard extends ScoreboardBuilder {
     private int socialId;
 
     public TestScoreboard(Player player) {
-        super(player, "  §a§lHallu :D  ");
+        super(player, "  §6§lmarioCST.de  ");
         socialId = 0;
 
         run();
@@ -17,6 +17,8 @@ public class TestScoreboard extends ScoreboardBuilder {
 
     @Override
     public void createScoreboard() {
+        setScore(ChatColor.BLACK.toString(), 4);
+
         setScore("§7Dein Rang:", 3);
 
         if (player.isOp()){
@@ -39,17 +41,62 @@ public class TestScoreboard extends ScoreboardBuilder {
             @Override
             public void run() {
                 switch (socialId) {
-                    case 0 -> setScore(ChatColor.GREEN + "Hi :D", 0);
-                    case 1 -> setScore(ChatColor.DARK_RED + "Was geht?", 0);
-                    case 2 -> setScore(ChatColor.BLACK + "Lel", 0);
+                    case 0 -> {
+                        setScore("§f»»»»»»««««««", 0);
+                        setScore("§f»»»»»»««««««", 5);
+                    }
+                    case 1 -> {
+                        setScore("§f»»»»»§6»«§f«««««", 0);
+                        setScore("§f»»»»»§6»«§f«««««", 5);
+                    }
+                    case 2 -> {
+                        setScore("§f»»»»§6»»««§f««««", 0);
+                        setScore("§f»»»»§6»»««§f««««", 5);
+                    }
+                    case 3 -> {
+                        setScore("§f»»»§6»»»«««§f«««", 0);
+                        setScore("§f»»»§6»»»«««§f«««", 5);
+                    }
+                    case 4 -> {
+                        setScore("§f»»§6»»»»««««§f««", 0);
+                        setScore("§f»»§6»»»»««««§f««", 5);
+                    }
+                    case 5 -> {
+                        setScore("§f»§6»»»»»«««««§f«", 0);
+                        setScore("§f»§6»»»»»«««««§f«", 5);
+                    }
+                    case 6 -> {
+                        setScore("§6»»»»»»««««««", 0);
+                        setScore("§6»»»»»»««««««", 5);
+                    }
+                    case 7 -> {
+                        setScore("§6»»»»»§f»«§6«««««", 0);
+                        setScore("§6»»»»»§f»«§6«««««", 5);
+                    }
+                    case 8 -> {
+                        setScore("§6»»»»§f»»««§6««««", 0);
+                        setScore("§6»»»»§f»»««§6««««", 5);
+                    }
+                    case 9 -> {
+                        setScore("§6»»»§f»»»«««§6«««", 0);
+                        setScore("§6»»»§f»»»«««§6«««", 5);
+                    }
+                    case 10 -> {
+                        setScore("§6»»§f»»»»««««§6««", 0);
+                        setScore("§6»»§f»»»»««««§6««", 5);
+                    }
+                    case 11 -> {
+                        setScore("§6»§f»»»»»«««««§6«", 0);
+                        setScore("§6»§f»»»»»«««««§6«", 5);
+                    }
                 }
 
                 socialId++;
 
-                if (socialId >= 3) {
+                if (socialId >= 12) {
                     socialId = 0;
                 }
             }
-        }.runTaskTimer(MarioMain.getInstance(), 20, 20);
+        }.runTaskTimer(MarioMain.getInstance(), 10, 10);
     }
 }
