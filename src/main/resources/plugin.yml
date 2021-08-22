@@ -82,9 +82,6 @@ commands:
   night:
     description: Macht Nacht
     permission: mario.night
-  timer:
-    description: Einfacher Timer Command
-    permission: mario.timer
   speed:
     description: Gibt dir Speed
     permission: mario.speed
@@ -200,7 +197,6 @@ permissions:
       mario.unnick: true
       mario.day: true
       mario.night: true
-      mario.timer: true
       mario.speed: true
       mario.realname: true
       mario.backpack: true
@@ -290,9 +286,6 @@ permissions:
     default: op
   mario.night:
     description: Rechte für den /night Command!
-    default: op
-  mario.timer:
-    description: Rechte für den /timer Command!
     default: op
   mario.speed:
     description: Rechte für den /speed Command!
