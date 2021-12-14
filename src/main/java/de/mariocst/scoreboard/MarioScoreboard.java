@@ -23,7 +23,7 @@ public class MarioScoreboard {
         this.player = player;
 
         if (scoreboard.getObjective("display") != null) {
-            Objects.requireNonNull(scoreboard.getObjective("deaths")).unregister();
+            Objects.requireNonNull(scoreboard.getObjective("display")).unregister();
         }
 
         this.objective = scoreboard.registerNewObjective("display", "dummy", displayName);
