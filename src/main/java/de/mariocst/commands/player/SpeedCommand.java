@@ -5,10 +5,18 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class SpeedCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class SpeedCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (!(sender instanceof Player player)) {
@@ -48,7 +56,7 @@ public class SpeedCommand implements CommandExecutor {
                                 }
                             }
                             default -> {
-                                player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
+                                player.sendMessage(MarioMain.getPrefix() + "/speed <fly|walk> <Value>");
                                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                             }
                         }
@@ -59,12 +67,12 @@ public class SpeedCommand implements CommandExecutor {
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
+                    player.sendMessage(MarioMain.getPrefix() + "/speed <fly|walk> <Value>");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
+                player.sendMessage(MarioMain.getPrefix() + "/speed <fly|walk> <Value>");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
             }
         } else {
@@ -72,5 +80,17 @@ public class SpeedCommand implements CommandExecutor {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
         }
         return false;
+    }
+
+    private final String[] MODES = { "fly", "walk" };
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        final List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            StringUtil.copyPartialMatches(args[0], Arrays.asList(MODES), completions);
+            Collections.sort(completions);
+        }
+        return completions;
     }
 }

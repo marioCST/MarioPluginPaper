@@ -7,14 +7,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+import java.util.*;
 
-public class TrollCommand implements CommandExecutor {
+public class TrollCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (!(sender instanceof Player player)) {
@@ -67,7 +70,7 @@ public class TrollCommand implements CommandExecutor {
                                         }
                                     }
                                 }
-                                case "thunderstrike", "ts", "strike" -> {
+                                case "thunderstruck", "ts", "struck" -> {
                                     t.getWorld().spawnEntity(t.getLocation(), EntityType.LIGHTNING);
 
                                     sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " hat einen Schlag!");
@@ -81,7 +84,7 @@ public class TrollCommand implements CommandExecutor {
 
                                     sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " wurde erfolgreich mit Itemdrop getrollt!");
                                 }
-                                default -> sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                                default -> sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
                             }
                         }
                         else {
@@ -93,11 +96,11 @@ public class TrollCommand implements CommandExecutor {
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                    sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
             }
             return false;
         }
@@ -144,7 +147,7 @@ public class TrollCommand implements CommandExecutor {
                                         player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " darf nun nicht mehr sein Inventar benutzen!");
                                     }
                                 }
-                                case "thunderstrike", "ts", "strike" -> {
+                                case "thunderstruck", "ts", "struck" -> {
                                     t.getWorld().spawnEntity(t.getLocation(), EntityType.LIGHTNING);
 
                                     sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " hat einen Schlag!");
@@ -159,7 +162,7 @@ public class TrollCommand implements CommandExecutor {
                                     sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " wurde erfolgreich mit Itemdrop getrollt!");
                                 }
                                 default -> {
-                                    player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                                    player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
                                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                                 }
                             }
@@ -175,12 +178,12 @@ public class TrollCommand implements CommandExecutor {
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                    player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstruck|drop> <Spieler>");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
         }
@@ -189,5 +192,26 @@ public class TrollCommand implements CommandExecutor {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return false;
+    }
+
+    private final String[] MODES = { "explosion", "inventory", "thunderstruck", "drop" };
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        final List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            StringUtil.copyPartialMatches(args[0], Arrays.asList(MODES), completions);
+        }
+        else if (args.length == 2) {
+            final List<String> names = new ArrayList<>();
+
+            for (Player player : MarioMain.getInstance().getServer().getOnlinePlayers()) {
+                names.add(player.getName());
+            }
+
+            StringUtil.copyPartialMatches(args[1], names, completions);
+            Collections.sort(completions);
+        }
+        return completions;
     }
 }

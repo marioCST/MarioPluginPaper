@@ -162,35 +162,49 @@ public final class MarioMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("backpack")).setExecutor(new BackpackCommand());
         Objects.requireNonNull(this.getCommand("backpacklarge")).setExecutor(new BackpackLargeCommand());
         Objects.requireNonNull(this.getCommand("clearenderchest")).setExecutor(new ClearEnderChestCommand());
+        Objects.requireNonNull(this.getCommand("clearenderchest")).setTabCompleter(new ClearEnderChestCommand());
         Objects.requireNonNull(this.getCommand("clearinventory")).setExecutor(new ClearInventoryCommand());
+        Objects.requireNonNull(this.getCommand("clearinventory")).setTabCompleter(new ClearInventoryCommand());
         Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new ECCommand());
         Objects.requireNonNull(this.getCommand("enderinvsee")).setExecutor(new EnderInvseeCommand());
+        Objects.requireNonNull(this.getCommand("enderinvsee")).setTabCompleter(new EnderInvseeCommand());
         Objects.requireNonNull(this.getCommand("invsee")).setExecutor(new InvseeCommand());
+        Objects.requireNonNull(this.getCommand("invsee")).setTabCompleter(new InvseeCommand());
 
         // Player
         Objects.requireNonNull(this.getCommand("die")).setExecutor(new DieCommand());
         Objects.requireNonNull(this.getCommand("feed")).setExecutor(new FeedCommand());
+        Objects.requireNonNull(this.getCommand("feed")).setTabCompleter(new FeedCommand());
         Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand());
+        Objects.requireNonNull(this.getCommand("fly")).setTabCompleter(new FlyCommand());
         Objects.requireNonNull(this.getCommand("gm")).setExecutor(new GMCommand());
+        Objects.requireNonNull(this.getCommand("gm")).setTabCompleter(new GMCommand());
         Objects.requireNonNull(this.getCommand("heal")).setExecutor(new HealCommand());
+        Objects.requireNonNull(this.getCommand("heal")).setTabCompleter(new HealCommand());
         Objects.requireNonNull(this.getCommand("nick")).setExecutor(new NickCommand());
         Objects.requireNonNull(this.getCommand("realname")).setExecutor(new RealnameCommand());
         Objects.requireNonNull(this.getCommand("speed")).setExecutor(new SpeedCommand());
+        Objects.requireNonNull(this.getCommand("speed")).setTabCompleter(new SpeedCommand());
         Objects.requireNonNull(this.getCommand("unnick")).setExecutor(new UnnickCommand());
 
         // Random
         Objects.requireNonNull(this.getCommand("date")).setExecutor(new DateCommand());
         Objects.requireNonNull(this.getCommand("discord")).setExecutor(new DiscordCommand());
         Objects.requireNonNull(this.getCommand("troll")).setExecutor(new TrollCommand());
+        Objects.requireNonNull(this.getCommand("troll")).setTabCompleter(new TrollCommand());
 
         // Send
         Objects.requireNonNull(this.getCommand("sendactionbar")).setExecutor(new SendActionBarCommand());
+        Objects.requireNonNull(this.getCommand("sendactionbar")).setTabCompleter(new SendActionBarCommand());
         Objects.requireNonNull(this.getCommand("sendmessage")).setExecutor(new SendMessageCommand());
+        Objects.requireNonNull(this.getCommand("sendmessage")).setTabCompleter(new SendMessageCommand());
         Objects.requireNonNull(this.getCommand("sendtitle")).setExecutor(new SendTitleCommand());
+        Objects.requireNonNull(this.getCommand("sendtitle")).setTabCompleter(new SendTitleCommand());
 
         // Server
         Objects.requireNonNull(this.getCommand("banall")).setExecutor(new BanAllCommand());
         Objects.requireNonNull(this.getCommand("config")).setExecutor(new ConfigCommand());
+        Objects.requireNonNull(this.getCommand("config")).setTabCompleter(new ConfigCommand());
         Objects.requireNonNull(this.getCommand("kickall")).setExecutor(new KickAllCommand());
 
         // Setter
@@ -199,12 +213,16 @@ public final class MarioMain extends JavaPlugin {
 
         // Storing
         Objects.requireNonNull(this.getCommand("backpackstored")).setExecutor(new BackpackStoredCommand());
+        Objects.requireNonNull(this.getCommand("backpackstored")).setTabCompleter(new BackpackStoredCommand());
         Objects.requireNonNull(this.getCommand("restoreinventory")).setExecutor(new RestoreInventoryCommand());
+        Objects.requireNonNull(this.getCommand("restoreinventory")).setTabCompleter(new RestoreInventoryCommand());
         Objects.requireNonNull(this.getCommand("storeinventory")).setExecutor(new StoreInventoryCommand());
+        Objects.requireNonNull(this.getCommand("storeinventory")).setTabCompleter(new StoreInventoryCommand());
 
         // World
         Objects.requireNonNull(this.getCommand("day")).setExecutor(new DayCommand());
         Objects.requireNonNull(this.getCommand("forceloadchunk")).setExecutor(new ForceLoadChunkCommand());
+        Objects.requireNonNull(this.getCommand("forceloadchunk")).setTabCompleter(new ForceLoadChunkCommand());
         Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand());
     }
 
