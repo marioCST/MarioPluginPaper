@@ -3,17 +3,16 @@ package de.mariocst;
 import de.mariocst.backpack.BackpackManager;
 import de.mariocst.backpack.BackpackManagerLarge;
 import de.mariocst.backpack.BackpackManagerStored;
-import de.mariocst.commands.Announcements.*;
-import de.mariocst.commands.Chat.*;
-import de.mariocst.commands.Inventory.*;
-import de.mariocst.commands.Invsee.*;
-import de.mariocst.commands.Others.*;
-import de.mariocst.commands.Player.*;
-import de.mariocst.commands.Send.*;
-import de.mariocst.commands.Server.*;
-import de.mariocst.commands.Setter.*;
-import de.mariocst.commands.Storing.*;
-import de.mariocst.commands.World.*;
+import de.mariocst.commands.announcements.*;
+import de.mariocst.commands.chat.*;
+import de.mariocst.commands.inventory.*;
+import de.mariocst.commands.random.*;
+import de.mariocst.commands.player.*;
+import de.mariocst.commands.send.*;
+import de.mariocst.commands.server.*;
+import de.mariocst.commands.setter.*;
+import de.mariocst.commands.storing.*;
+import de.mariocst.commands.world.*;
 import de.mariocst.listeners.*;
 import de.mariocst.scoreboard.MarioScoreboard;
 import de.mariocst.utils.*;
@@ -147,34 +146,27 @@ public final class MarioMain extends JavaPlugin {
     }
 
     private void register() throws NullPointerException {
-        //Announcements
+        // Announcements
         Objects.requireNonNull(this.getCommand("broadcast5")).setExecutor(new Custom());
         Objects.requireNonNull(this.getCommand("announcekick")).setExecutor(new Kick());
         Objects.requireNonNull(this.getCommand("announcereload")).setExecutor(new Reload());
         Objects.requireNonNull(this.getCommand("announcerestart")).setExecutor(new Restart());
         Objects.requireNonNull(this.getCommand("announcestop")).setExecutor(new Stop());
 
-        //Chat
+        // Chat
         Objects.requireNonNull(this.getCommand("broadcast")).setExecutor(new BroadcastCommand());
         Objects.requireNonNull(this.getCommand("chatclear")).setExecutor(new ChatClearCommand());
 
-        //Inventory
+        // Inventory
         Objects.requireNonNull(this.getCommand("backpack")).setExecutor(new BackpackCommand());
         Objects.requireNonNull(this.getCommand("backpacklarge")).setExecutor(new BackpackLargeCommand());
         Objects.requireNonNull(this.getCommand("clearenderchest")).setExecutor(new ClearEnderChestCommand());
         Objects.requireNonNull(this.getCommand("clearinventory")).setExecutor(new ClearInventoryCommand());
-
-        //Invsee
+        Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new ECCommand());
         Objects.requireNonNull(this.getCommand("enderinvsee")).setExecutor(new EnderInvseeCommand());
         Objects.requireNonNull(this.getCommand("invsee")).setExecutor(new InvseeCommand());
 
-        //Others
-        Objects.requireNonNull(this.getCommand("date")).setExecutor(new DateCommand());
-        Objects.requireNonNull(this.getCommand("discord")).setExecutor(new DiscordCommand());
-        Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new ECCommand());
-        Objects.requireNonNull(this.getCommand("troll")).setExecutor(new TrollCommand());
-
-        //Player
+        // Player
         Objects.requireNonNull(this.getCommand("die")).setExecutor(new DieCommand());
         Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand());
         Objects.requireNonNull(this.getCommand("gm")).setExecutor(new GMCommand());
@@ -184,26 +176,31 @@ public final class MarioMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("speed")).setExecutor(new SpeedCommand());
         Objects.requireNonNull(this.getCommand("unnick")).setExecutor(new UnnickCommand());
 
-        //Send
+        // Random
+        Objects.requireNonNull(this.getCommand("date")).setExecutor(new DateCommand());
+        Objects.requireNonNull(this.getCommand("discord")).setExecutor(new DiscordCommand());
+        Objects.requireNonNull(this.getCommand("troll")).setExecutor(new TrollCommand());
+
+        // Send
         Objects.requireNonNull(this.getCommand("sendactionbar")).setExecutor(new SendActionBarCommand());
         Objects.requireNonNull(this.getCommand("sendmessage")).setExecutor(new SendMessageCommand());
         Objects.requireNonNull(this.getCommand("sendtitle")).setExecutor(new SendTitleCommand());
 
-        //Server
+        // Server
         Objects.requireNonNull(this.getCommand("banall")).setExecutor(new BanAllCommand());
         Objects.requireNonNull(this.getCommand("config")).setExecutor(new ConfigCommand());
         Objects.requireNonNull(this.getCommand("kickall")).setExecutor(new KickAllCommand());
 
-        //Setter
+        // Setter
         Objects.requireNonNull(this.getCommand("setlink")).setExecutor(new SetLinkCommand());
         Objects.requireNonNull(this.getCommand("setprefix")).setExecutor(new SetPrefixCommand());
 
-        //Storing
+        // Storing
         Objects.requireNonNull(this.getCommand("backpackstored")).setExecutor(new BackpackStoredCommand());
         Objects.requireNonNull(this.getCommand("restoreinventory")).setExecutor(new RestoreInventoryCommand());
         Objects.requireNonNull(this.getCommand("storeinventory")).setExecutor(new StoreInventoryCommand());
 
-        //World
+        // World
         Objects.requireNonNull(this.getCommand("day")).setExecutor(new DayCommand());
         Objects.requireNonNull(this.getCommand("forceloadchunk")).setExecutor(new ForceLoadChunkCommand());
         Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand());
