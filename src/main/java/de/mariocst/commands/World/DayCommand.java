@@ -6,24 +6,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class DayCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if(!(sender instanceof Player)) {
-            MarioMain.getInstance().log("Dieser Command kann leider nur InGame ausgeführt werden!");
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
+            MarioMain.getInstance().log("Bitte führe den Command InGame aus!");
             return true;
         }
 
-        Player player = (Player) sender;
-
-        if(player.hasPermission("mario.day") || player.hasPermission("*") || player.isOp()) {
-            player.getWorld().setTime(0);
+        if (player.hasPermission("mario.day") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
+            player.getWorld().setTime(1000);
             player.sendMessage(MarioMain.getPrefix() + "Die Zeit wurde auf Tag gestellt!");
-        } else {
+        }
+        else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return true;
     }

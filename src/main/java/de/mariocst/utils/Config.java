@@ -11,7 +11,6 @@ public class Config {
     private final YamlConfiguration config;
 
     public Config() {
-
         File dir = new File("./plugins/MarioPlugin");
 
         if (!dir.exists()) {

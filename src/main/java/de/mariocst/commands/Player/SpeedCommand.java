@@ -6,82 +6,71 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class SpeedCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            MarioMain.getInstance().log("Dieser Befehl geht nur InGame!");
-        } else {
-            Player player = (Player) sender;
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
+            MarioMain.getInstance().log("Bitte führe den Command InGame aus!");
+            return true;
+        }
 
-            if (player.hasPermission("mario.speed") || player.isOp()) {
-                try {
-                    float value = Float.parseFloat(args[1]);
-                    if (args.length == 2) {
-                        try {
-                            switch (args[0].toLowerCase()) {
-                                case "fly": {
-                                    if (value <= 1 && value >= -1) {
-                                        player.setFlySpeed(value);
-                                        sender.sendMessage(MarioMain.getPrefix() + "Dein Fly Speed ist nun: " + value);
-                                    }
-                                    else if (value > 1) {
-                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
-                                    }
-                                    else if (value < -1) {
-                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
-                                    }
-                                    else {
-                                        player.sendMessage(MarioMain.getPrefix() + "Irgendetwas ist GEWALTIG schief gelaufen!");
-                                    }
-                                    break;
+        if (player.hasPermission("mario.speed") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
+            try {
+                if (args.length == 2) {
+                    try {
+                        float value = Float.parseFloat(args[1]);
+
+                        switch (args[0].toLowerCase()) {
+                            case "fly" -> {
+                                if (value > 1) {
+                                    player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
                                 }
-                                case "walk": {
-                                    if (value < 1 && value > -1) {
-                                        player.setWalkSpeed(value);
-                                        sender.sendMessage(MarioMain.getPrefix() + "Dein Walk Speed ist nun: " + value);
-                                    }
-                                    else if (value > 1) {
-                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
-                                    }
-                                    else if (value < -1) {
-                                        player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
-                                    }
-                                    else {
-                                        player.sendMessage(MarioMain.getPrefix() + "Irgendetwas ist GEWALTIG schief gelaufen!");
-                                    }
-                                    break;
+                                else if (value < -1) {
+                                    player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
                                 }
-                                default: {
-                                    sendUsage(sender);
-                                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
-                                    break;
+                                else {
+                                    player.setFlySpeed(value);
+                                    player.sendMessage(MarioMain.getPrefix() + "Dein Fly Speed ist nun: " + value);
                                 }
                             }
-                        } catch (NumberFormatException e) {
-                            sender.sendMessage(MarioMain.getPrefix() + "Bitte gib eine gültige Zahl an!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
-                            e.printStackTrace();
+                            case "walk" -> {
+                                if (value > 1) {
+                                    player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine kleinere Zahl!");
+                                }
+                                else if (value < -1) {
+                                    player.sendMessage(MarioMain.getPrefix() + "Bitte benutze eine größere Zahl!");
+                                }
+                                else {
+                                    player.setWalkSpeed(value);
+                                    player.sendMessage(MarioMain.getPrefix() + "Dein Walk Speed ist nun: " + value);
+                                }
+                            }
+                            default -> {
+                                player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
+                                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
+                            }
                         }
-                    } else {
-                        sendUsage(sender);
+                    }
+                    catch (NumberFormatException e) {
+                        player.sendMessage(MarioMain.getPrefix() + "Bitte gib eine gültige Zahl an!");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                     }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    sendUsage(sender);
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
-                    e.printStackTrace();
                 }
-            } else {
-                sender.sendMessage(MarioMain.getPrefix() + "§cKeine Rechte!");
+                else {
+                    player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
+                }
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+                player.sendMessage(MarioMain.getPrefix() + "/speed fly/walk <Value>");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
             }
+        } else {
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
         }
         return false;
-    }
-
-    public void sendUsage(CommandSender sender) {
-        sender.sendMessage(MarioMain.getPrefix() + "§cUsage: §e/speed fly/walk <Value>");
     }
 }

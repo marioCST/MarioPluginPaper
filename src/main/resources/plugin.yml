@@ -4,6 +4,7 @@ main: de.mariocst.MarioMain
 api-version: 1.16
 authors: [ marioCST ]
 description: marioCSTs 1.16.5 Plugin
+depend: [WorldEdit]
 
 commands:
   heal:
@@ -13,9 +14,6 @@ commands:
   date:
     description: Zeigt das Datum an.
     permission: mario.date
-  lol:
-    description: Schreibt lol.
-    permission: mario.lol
   announcerestart:
     description: ADMIN Schreibt 5mal in den Chat "SERVER RESTART! Bitte in 1 Min. wieder joinen!".
     aliases: ["ars"]
@@ -55,10 +53,6 @@ commands:
   fly:
     description: Fly Command
     permission: mario.fly
-  dumb:
-    description: Du bist dumm
-    aliases: ["dumm"]
-    permission: mario.dumb
   chatclear:
     description: Cleart den Chat
     aliases: ["cc"]
@@ -180,7 +174,6 @@ permissions:
       mario.stop: true
       mario.restart: true
       mario.date: true
-      mario.lol: true
       mario.heal: true
       mario.kick: true
       mario.die: true
@@ -189,7 +182,6 @@ permissions:
       mario.discord: true
       mario.setlink: true
       mario.fly: true
-      mario.dumb: true
       mario.chatclear: true
       mario.clear: true
       mario.gm: true
@@ -239,9 +231,6 @@ permissions:
   mario.kick:
     description: Rechte für den /announcekick Command!
     default: op
-  mario.lol:
-    description: Rechte für den /lol Command!
-    default: op
   mario.date:
     description: Rechte für den /date Command!
     default: op
@@ -262,9 +251,6 @@ permissions:
     default: op
   mario.fly:
     description: Rechte für den /fly Command!
-    default: op
-  mario.dumb:
-    description: Rechte für den /dumb Command!
     default: op
   mario.chatclear:
     description: Rechte für den /chatclear Command!

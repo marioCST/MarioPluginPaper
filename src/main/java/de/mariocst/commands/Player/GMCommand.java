@@ -7,84 +7,86 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class GMCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
-            String msg = String.join(" ", args);
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        boolean b = args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("su");
+        boolean b1 = args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("c");
+        boolean b2 = args[0].equalsIgnoreCase("2") || args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("a");
+        boolean b3 = args[0].equalsIgnoreCase("3") || args[0].equalsIgnoreCase("spectator") || args[0].equalsIgnoreCase("sp");
 
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length == 2) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[1]);
 
                     try {
                         if (t != null) {
-                            if(msg.equals("0") || msg.equalsIgnoreCase("survival") || msg.equalsIgnoreCase("su")) {
+                            if (b) {
                                 t.setGameMode(GameMode.SURVIVAL);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Survival gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Survival gesetzt worden!");
-                            } else if (msg.equals("1") || msg.equalsIgnoreCase("creative") || msg.equalsIgnoreCase("c")) {
+                            }
+                            else if (b1) {
                                 t.setGameMode(GameMode.CREATIVE);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Creative gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Creative gesetzt worden!");
-                            } else if (msg.equals("2") || msg.equalsIgnoreCase("adventure") || msg.equalsIgnoreCase("a")) {
+                            }
+                            else if (b2) {
                                 t.setGameMode(GameMode.ADVENTURE);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Adventure gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Adventure gesetzt worden!");
-                            } else if (msg.equals("3") || msg.equalsIgnoreCase("spectator") || msg.equalsIgnoreCase("sp")) {
+                            }
+                            else if (b3) {
                                 t.setGameMode(GameMode.SPECTATOR);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Spectator gestellt!");
                                 sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Spectator gesetzt worden!");
-                            } else {
+                            }
+                            else {
                                 sender.sendMessage(MarioMain.getPrefix() + "Bitte gib einen gültigen Gamemode ein!");
                             }
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "Usage: /gm 0 oder 1 oder 2 oder 3 oder survival oder creative oder adventure oder spectator oder su oder c oder a oder sp");
+                    sender.sendMessage(MarioMain.getPrefix() + "/gm <0|1|2|3|surivival|creative|adventure|spectator|su|c|a|sp> <Spieler>");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage(MarioMain.getPrefix() + "Usage: /gm 0 oder 1 oder 2 oder 3 oder survival oder creative oder adventure oder spectator oder su oder c oder a oder sp");
+                sender.sendMessage(MarioMain.getPrefix() + "/gm <0|1|2|3|surivival|creative|adventure|spectator|su|c|a|sp> <Spieler>");
             }
             return false;
         }
 
-        Player player = (Player) sender;
-        if(player.hasPermission("mario.gm") || player.hasPermission("*") || player.isOp()) {
-            String msg = String.join(" ", args);
-
-            boolean b = msg.equals("0") || msg.equalsIgnoreCase("survival") || msg.equalsIgnoreCase("su");
-            boolean b1 = msg.equals("1") || msg.equalsIgnoreCase("creative") || msg.equalsIgnoreCase("c");
-            boolean b2 = msg.equals("2") || msg.equalsIgnoreCase("adventure") || msg.equalsIgnoreCase("a");
-            boolean b3 = msg.equals("3") || msg.equalsIgnoreCase("spectator") || msg.equalsIgnoreCase("sp");
-
+        if (player.hasPermission("mario.gm") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length == 1) {
-                    if(b) {
+                    if (b) {
                         player.setGameMode(GameMode.SURVIVAL);
-                        sender.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Survival gestellt!");
-                    } else if (b1) {
+                        player.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Survival gestellt!");
+                    }
+                    else if (b1) {
                         player.setGameMode(GameMode.CREATIVE);
-                        sender.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Creative gestellt!");
-                    } else if (b2) {
+                        player.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Creative gestellt!");
+                    }
+                    else if (b2) {
                         player.setGameMode(GameMode.ADVENTURE);
-                        sender.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Adventure gestellt!");
-                    } else if (b3) {
+                        player.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Adventure gestellt!");
+                    }
+                    else if (b3) {
                         player.setGameMode(GameMode.SPECTATOR);
-                        sender.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Spectator gestellt!");
-                    } else {
-                        sender.sendMessage(MarioMain.getPrefix() + "Bitte gib einen gültigen Gamemode ein!");
+                        player.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Spectator gestellt!");
+                    }
+                    else {
+                        player.sendMessage(MarioMain.getPrefix() + "Bitte gib einen gültigen Gamemode ein!");
                     }
                 }
                 else if (args.length == 2) {
@@ -92,50 +94,52 @@ public class GMCommand implements CommandExecutor {
 
                     try {
                         if (t != null) {
-                            if(b) {
+                            if (b) {
                                 t.setGameMode(GameMode.SURVIVAL);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Survival gestellt!");
-                                sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Survival gesetzt worden!");
-                            } else if (b1) {
+                                player.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Survival gesetzt worden!");
+                            }
+                            else if (b1) {
                                 t.setGameMode(GameMode.CREATIVE);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Creative gestellt!");
-                                sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Creative gesetzt worden!");
-                            } else if (b2) {
+                                player.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Creative gesetzt worden!");
+                            }
+                            else if (b2) {
                                 t.setGameMode(GameMode.ADVENTURE);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Adventure gestellt!");
-                                sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Adventure gesetzt worden!");
-                            } else if (b3) {
+                                player.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Adventure gesetzt worden!");
+                            }
+                            else if (b3) {
                                 t.setGameMode(GameMode.SPECTATOR);
                                 t.sendMessage(MarioMain.getPrefix() + "Dein Gamemode wurde auf Spectator gestellt!");
-                                sender.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Spectator gesetzt worden!");
-                            } else {
-                                sender.sendMessage(MarioMain.getPrefix() + "Bitte gib einen gültigen Gamemode ein!");
+                                player.sendMessage(MarioMain.getPrefix() + "Der Gamemode von " + t.getName() + " ist auf Spectator gesetzt worden!");
+                            }
+                            else {
+                                player.sendMessage(MarioMain.getPrefix() + "Bitte gib einen gültigen Gamemode ein!");
                             }
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                            player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "Usage: /gm 0 oder 1 oder 2 oder 3 oder survival oder creative oder adventure oder spectator oder su oder c oder a oder sp");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                    player.sendMessage(MarioMain.getPrefix() + "/gm <0|1|2|3|surivival|creative|adventure|spectator|su|c|a|sp> [Spieler]");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage(MarioMain.getPrefix() + "Usage: /gm 0 oder 1 oder 2 oder 3 oder survival oder creative oder adventure oder spectator oder su oder c oder a oder sp");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.sendMessage(MarioMain.getPrefix() + "/gm <0|1|2|3|surivival|creative|adventure|spectator|su|c|a|sp> [Spieler]");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
         } else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return false;
     }

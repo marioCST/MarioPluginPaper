@@ -1,77 +1,75 @@
 package de.mariocst.commands.Send;
 
-import com.destroystokyo.paper.Title;
 import de.mariocst.MarioMain;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.time.Duration;
 
 public class SendTitleCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if(!(sender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length >= 2) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[0]);
 
                     try {
                         if (t != null) {
-                            String msg = "";
+                            StringBuilder msg = new StringBuilder();
                             for(int i = 1; i < args.length; i++) {
-                                msg = msg + args[i] + " ";
+                                msg.append(args[i]).append(" ");
                             }
 
-                            t.sendTitle(msg, "");
+                            t.showTitle(Title.title(Component.text(""), Component.text(msg.toString()), Title.Times.of(Duration.ofMillis(500), Duration.ofSeconds(1), Duration.ofMillis(500))));
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage("Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                     }
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage("/st <Spieler> <Titel>");
+                sender.sendMessage(MarioMain.getPrefix() + "/st <Spieler> <Titel>");
             }
             return true;
         }
 
-        Player player = (Player) sender;
-
-        if(player.hasPermission("mario.sendmessage") || player.hasPermission("*") || player.isOp()) {
+        if (player.hasPermission("mario.sendmessage") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length >= 2) {
                     Player t = player.getServer().getPlayer(args[0]);
 
                     try {
                         if (t != null) {
-                            String msg = "";
+                            StringBuilder msg = new StringBuilder();
                             for(int i = 1; i < args.length; i++) {
-                                msg = msg + args[i] + " ";
+                                msg.append(args[i]).append(" ");
                             }
 
-                            t.sendTitle(msg, "");
+                            t.showTitle(Title.title(Component.text(""), Component.text(msg.toString()), Title.Times.of(Duration.ofMillis(500), Duration.ofSeconds(1), Duration.ofMillis(500))));
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
                 player.sendMessage(MarioMain.getPrefix() + "/st <Spieler> <Titel>");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
-        } else {
+        }
+        else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return true;
     }

@@ -16,7 +16,7 @@ public class Prefix {
             this.prefix = config.getConfig().getString("prefix");
         }
         else {
-            this.prefix = "§8[§6marioCST.de§8] §b";
+            this.prefix = "§8[§6marioCST.de§8] §f";
         }
 
         MarioMain.setPrefix(this.prefix);
@@ -29,7 +29,7 @@ public class Prefix {
             this.prefix = config.getConfig().getString("prefix");
         }
         else {
-            this.prefix = "§8[§6marioCST.de§8] §b";
+            this.prefix = "§8[§6marioCST.de§8] §f";
         }
 
         MarioMain.setPrefix(this.prefix);

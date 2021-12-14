@@ -1,39 +1,57 @@
 package de.mariocst.scoreboard;
 
 import de.mariocst.MarioMain;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.jetbrains.annotations.Nullable;
 
-public class TestScoreboard extends ScoreboardBuilder {
+import java.util.Objects;
+
+public class MarioScoreboard {
+    private final Objective objective;
+    private final Player player;
     private int socialId;
 
-    public TestScoreboard(Player player) {
-        super(player, "  §6§lmarioCST.de  ");
-        socialId = 0;
+    public MarioScoreboard(Component displayName, Scoreboard scoreboard, @Nullable Player player) {
+        this.socialId = 0;
 
-        run();
+        this.player = player;
+
+        if (scoreboard.getObjective("display") != null) {
+            Objects.requireNonNull(scoreboard.getObjective("deaths")).unregister();
+        }
+
+        this.objective = scoreboard.registerNewObjective("display", "dummy", displayName);
+        this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+
+        this.createScoreboard();
+        this.run();
     }
 
-    @Override
     public void createScoreboard() {
-        setScore(ChatColor.BLACK.toString(), 4);
+        if (this.player == null) return;
 
-        setScore("§7Dein Rang:", 3);
+        this.setScore(ChatColor.BLACK.toString(), 4);
 
-        if (player.isOp()){
-            setScore("§cOperator", 2);
+        this.setScore("§7Dein Rang:", 3);
+
+        if (player.isOp()) {
+            this.setScore("§cOperator", 2);
         }
         else {
-            setScore("§7Spieler", 2);
+            this.setScore("§7Spieler", 2);
         }
 
-        setScore(ChatColor.GOLD.toString(), 1);
+        this.setScore(ChatColor.GOLD.toString(), 1);
     }
 
-    @Override
-    public void update() {
-
+    public void setScore(String content, int score) {
+        this.objective.getScore(content).setScore(score);
     }
 
     private void run() {

@@ -10,7 +10,6 @@ public class BackpacksLarge {
     private final YamlConfiguration backpacksLarge;
 
     public BackpacksLarge() {
-
         File dir = new File("./plugins/MarioPlugin");
 
         if (!dir.exists()) {

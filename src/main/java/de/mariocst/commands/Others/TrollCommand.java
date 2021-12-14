@@ -1,24 +1,23 @@
 package de.mariocst.commands.Others;
 
 import de.mariocst.MarioMain;
-import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class TrollCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length >= 2) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[1]);
@@ -76,39 +75,34 @@ public class TrollCommand implements CommandExecutor {
                                 case "drop" -> {
                                     for (int i = 0; i <= 39; i++) {
                                         if (t.getInventory().getItem(i) != null) {
-                                            t.getWorld().dropItem(t.getLocation(), t.getInventory().getItem(i));
+                                            t.getWorld().dropItem(t.getLocation(), Objects.requireNonNull(t.getInventory().getItem(i)));
                                         }
                                     }
 
                                     sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + t.getName() + " wurde erfolgreich mit Itemdrop getrollt!");
                                 }
-                                default -> {
-                                    sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
-                                }
+                                default -> sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
                             }
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                    sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                sender.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
             }
             return false;
         }
 
-        Player player = (Player) sender;
-        if (player.hasPermission("mario.troll") || player.hasPermission("*") || player.isOp()) {
+        if (player.hasPermission("mario.troll") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length >= 2) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[1]);
@@ -123,11 +117,11 @@ public class TrollCommand implements CommandExecutor {
 
                                         if (multiplier > 45.0f) {
                                             player.sendMessage(MarioMain.getPrefix() + "Bitte gib eine kleinere Zahl ein!");
-                                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                                         }
                                         else if (multiplier <= 0.0f) {
                                             player.sendMessage(MarioMain.getPrefix() + "Bitte gib eine größere Zahl ein!");
-                                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                                         }
                                         else {
                                             t.getWorld().createExplosion(t.getLocation(), value);
@@ -158,7 +152,7 @@ public class TrollCommand implements CommandExecutor {
                                 case "drop" -> {
                                     for (int i = 0; i <= 39; i++) {
                                         if (t.getInventory().getItem(i) != null) {
-                                            t.getWorld().dropItem(t.getLocation(), t.getInventory().getItem(i));
+                                            t.getWorld().dropItem(t.getLocation(), Objects.requireNonNull(t.getInventory().getItem(i)));
                                         }
                                     }
 
@@ -166,34 +160,33 @@ public class TrollCommand implements CommandExecutor {
                                 }
                                 default -> {
                                     player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
-                                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                                 }
                             }
                         }
                         else {
-                            player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                            player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[1] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                    player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.sendMessage(MarioMain.getPrefix() + "/troll <explosion|inventory|thunderstrike|drop> <Spieler>");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
-        } else {
+        }
+        else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return false;
     }

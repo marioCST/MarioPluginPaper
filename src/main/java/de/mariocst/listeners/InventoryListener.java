@@ -12,23 +12,20 @@ public class InventoryListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        try {
-            for (Player trolled : MarioMain.getInstance().invTroll) {
-                if (event.getClickedInventory() == player.getInventory()) {
-                    event.setCancelled(true);
-                }
+        if (MarioMain.getInstance().invTroll.isEmpty()) return;
+
+        for (Player ignored : MarioMain.getInstance().invTroll) {
+            if (event.getClickedInventory() == player.getInventory()) {
+                event.setCancelled(true);
             }
-        }
-        catch (NullPointerException e) {
-            e.printStackTrace();
         }
     }
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        Player player = event.getPlayer();
+        if (MarioMain.getInstance().invTroll.isEmpty()) return;
 
-        for (Player trolled : MarioMain.getInstance().invTroll) {
+        for (Player ignored : MarioMain.getInstance().invTroll) {
             event.setCancelled(true);
             event.getItemDrop().remove();
         }

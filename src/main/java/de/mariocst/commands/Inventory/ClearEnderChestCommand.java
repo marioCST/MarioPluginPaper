@@ -6,11 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class ClearEnderChestCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length == 1) {
                     try {
@@ -22,12 +23,11 @@ public class ClearEnderChestCommand implements CommandExecutor {
                             sender.sendMessage(MarioMain.getPrefix() + "Die Ender Chest von " + t.getName() + " wurde gecleart!");
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                     }
                 }
                 else {
@@ -35,14 +35,12 @@ public class ClearEnderChestCommand implements CommandExecutor {
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
                 sender.sendMessage(MarioMain.getPrefix() + "/clearenderchest <Spieler>");
             }
             return false;
         }
 
-        Player player = (Player) sender;
-        if (player.hasPermission("mario.clear") || player.hasPermission("*") || player.isOp()) {
+        if (player.hasPermission("mario.clear") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length == 0) {
                     player.getEnderChest().clear();
@@ -58,29 +56,28 @@ public class ClearEnderChestCommand implements CommandExecutor {
                             player.sendMessage(MarioMain.getPrefix() + "Die Ender Chest von " + t.getName() + " wurde gecleart!");
                         }
                         else {
-                            player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                            player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "/clearenderchest oder /clearenderchest <Spieler>");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                    player.sendMessage(MarioMain.getPrefix() + "/clearenderchest [Spieler]");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                player.sendMessage(MarioMain.getPrefix() + "/clearenderchest oder /clearenderchest <Spieler>");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.sendMessage(MarioMain.getPrefix() + "/clearenderchest [Spieler]");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
-        } else {
+        }
+        else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return false;
     }

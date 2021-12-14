@@ -15,17 +15,18 @@ import de.mariocst.commands.Setter.*;
 import de.mariocst.commands.Storing.*;
 import de.mariocst.commands.World.*;
 import de.mariocst.listeners.*;
+import de.mariocst.scoreboard.MarioScoreboard;
 import de.mariocst.utils.*;
-import org.bukkit.Bukkit;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class MarioMain extends JavaPlugin {
-
     private static String prefix;
     private static MarioMain instance;
 
@@ -44,10 +45,8 @@ public final class MarioMain extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
-        backpacks = new Backpacks();
-        backpacksLarge = new BackpacksLarge();
-        backpacksStored = new BackpacksStored();
-        config = new Config();
+
+        this.loadConfigs();
     }
 
     public MarioMain() {
@@ -56,38 +55,42 @@ public final class MarioMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.register();
-        listenerRegistration();
+        try {
+            this.register();
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+            this.warning("Error beim Initialisieren der Commands! Deaktiviere Plugin...");
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
-        prefixConfig = new Prefix();
-        discordLink = new DiscordLink();
-        backpackManager = new BackpackManager();
-        backpackManagerLarge = new BackpackManagerLarge();
-        backpackManagerStored = new BackpackManagerStored();
+        this.listenerRegistration();
+        this.registerScoreboards();
 
-        log("marioCST's Plugin geladen!");
+        this.log("marioCST's Plugin geladen!");
     }
 
     @Override
     public void onDisable() {
-        log("marioCST's Plugin entladen!");
-        saveConfigs();
+        this.log("marioCST's Plugin entladen!");
+        this.saveConfigs();
     }
 
     public Config getConfiguration() {
-        return config;
+        return this.config;
     }
 
     public Backpacks getBackpacks() {
-        return backpacks;
+        return this.backpacks;
     }
 
     public BackpacksLarge getBackpacksLarge() {
-        return backpacksLarge;
+        return this.backpacksLarge;
     }
 
     public BackpacksStored getBackpacksStored() {
-        return backpacksStored;
+        return this.backpacksStored;
     }
 
     public static String getPrefix() {
@@ -99,120 +102,115 @@ public final class MarioMain extends JavaPlugin {
     }
 
     private void listenerRegistration() {
-        PluginManager pluginManager = Bukkit.getPluginManager();
+        PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new InventoryListener(), this);
         pluginManager.registerEvents(new JoinListener(), this);
     }
 
     public void saveConfigs() {
-        prefixConfig.save();
-        discordLink.save();
-        backpackManager.save();
-        backpackManagerLarge.save();
-        backpackManagerStored.save();
-        backpacks.save();
-        backpacksLarge.save();
-        backpacksStored.save();
-        config.save();
+        this.prefixConfig.save();
+        this.discordLink.save();
+        this.backpackManager.save();
+        this.backpackManagerLarge.save();
+        this.backpackManagerStored.save();
+
+        this.backpacks.save();
+        this.backpacksLarge.save();
+        this.backpacksStored.save();
+        this.config.save();
     }
 
-    public void reloadConfigs() {
-        backpacks = new Backpacks();
-        backpacksLarge = new BackpacksLarge();
-        backpacksStored = new BackpacksStored();
-        config = new Config();
-        prefixConfig.reload();
-        discordLink.reload();
-        backpackManager.load();
-        backpackManagerLarge.load();
-        backpackManagerStored.load();
+    public void loadConfigs() {
+        this.backpacks = new Backpacks();
+        this.backpacksLarge = new BackpacksLarge();
+        this.backpacksStored = new BackpacksStored();
+        this.config = new Config();
+
+        this.prefixConfig = new Prefix();
+        this.discordLink = new DiscordLink();
+        this.backpackManager = new BackpackManager();
+        this.backpackManagerLarge = new BackpackManagerLarge();
+        this.backpackManagerStored = new BackpackManagerStored();
     }
 
     public void log(String text) {
-        Bukkit.getConsoleSender().sendMessage(getPrefix() + text);
+        this.getLogger().info(prefix + text);
     }
 
     public void warning(String text) {
-        getLogger().warning(getPrefix() + text);
+        this.getLogger().warning(prefix + text);
     }
 
-    private void register() {
+    private void registerScoreboards() {
+        new MarioScoreboard(Component.text("  " + prefix + "  "), this.getServer().getScoreboardManager().getMainScoreboard(), null);
+    }
 
+    private void register() throws NullPointerException {
         //Announcements
-        Bukkit.getPluginCommand("broadcast5").setExecutor(new Custom());
-        Bukkit.getPluginCommand("announcekick").setExecutor(new Kick());
-        Bukkit.getPluginCommand("announcereload").setExecutor(new Reload());
-        Bukkit.getPluginCommand("announcerestart").setExecutor(new Restart());
-        Bukkit.getPluginCommand("announcestop").setExecutor(new Stop());
+        Objects.requireNonNull(this.getCommand("broadcast5")).setExecutor(new Custom());
+        Objects.requireNonNull(this.getCommand("announcekick")).setExecutor(new Kick());
+        Objects.requireNonNull(this.getCommand("announcereload")).setExecutor(new Reload());
+        Objects.requireNonNull(this.getCommand("announcerestart")).setExecutor(new Restart());
+        Objects.requireNonNull(this.getCommand("announcestop")).setExecutor(new Stop());
 
         //Chat
-        Bukkit.getPluginCommand("broadcast").setExecutor(new BroadcastCommand());
-        Bukkit.getPluginCommand("chatclear").setExecutor(new ChatClearCommand());
+        Objects.requireNonNull(this.getCommand("broadcast")).setExecutor(new BroadcastCommand());
+        Objects.requireNonNull(this.getCommand("chatclear")).setExecutor(new ChatClearCommand());
 
         //Inventory
-        Bukkit.getPluginCommand("backpack").setExecutor(new BackpackCommand());
-        Bukkit.getPluginCommand("backpacklarge").setExecutor(new BackpackLargeCommand());
-        Bukkit.getPluginCommand("clearenderchest").setExecutor(new ClearEnderChestCommand());
-        Bukkit.getPluginCommand("clearinventory").setExecutor(new ClearInventoryCommand());
+        Objects.requireNonNull(this.getCommand("backpack")).setExecutor(new BackpackCommand());
+        Objects.requireNonNull(this.getCommand("backpacklarge")).setExecutor(new BackpackLargeCommand());
+        Objects.requireNonNull(this.getCommand("clearenderchest")).setExecutor(new ClearEnderChestCommand());
+        Objects.requireNonNull(this.getCommand("clearinventory")).setExecutor(new ClearInventoryCommand());
 
         //Invsee
-        Bukkit.getPluginCommand("enderinvsee").setExecutor(new EnderInvseeCommand());
-        Bukkit.getPluginCommand("invsee").setExecutor(new InvseeCommand());
+        Objects.requireNonNull(this.getCommand("enderinvsee")).setExecutor(new EnderInvseeCommand());
+        Objects.requireNonNull(this.getCommand("invsee")).setExecutor(new InvseeCommand());
 
         //Others
-        Bukkit.getPluginCommand("date").setExecutor(new DateCommand());
-        Bukkit.getPluginCommand("discord").setExecutor(new DiscordCommand());
-        Bukkit.getPluginCommand("enderchest").setExecutor(new ECCommand());
-        Bukkit.getPluginCommand("lol").setExecutor(new LolCommand());
-        Bukkit.getPluginCommand("troll").setExecutor(new TrollCommand());
+        Objects.requireNonNull(this.getCommand("date")).setExecutor(new DateCommand());
+        Objects.requireNonNull(this.getCommand("discord")).setExecutor(new DiscordCommand());
+        Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new ECCommand());
+        Objects.requireNonNull(this.getCommand("troll")).setExecutor(new TrollCommand());
 
         //Player
-        Bukkit.getPluginCommand("die").setExecutor(new DieCommand());
-        Bukkit.getPluginCommand("dumb").setExecutor(new DumbCommand());
-        Bukkit.getPluginCommand("fly").setExecutor(new FlyCommand());
-        Bukkit.getPluginCommand("gm").setExecutor(new GMCommand());
-        Bukkit.getPluginCommand("heal").setExecutor(new HealCommand());
-        Bukkit.getPluginCommand("nick").setExecutor(new NickCommand());
-        Bukkit.getPluginCommand("realname").setExecutor(new RealnameCommand());
-        Bukkit.getPluginCommand("speed").setExecutor(new SpeedCommand());
-        Bukkit.getPluginCommand("unnick").setExecutor(new UnnickCommand());
+        Objects.requireNonNull(this.getCommand("die")).setExecutor(new DieCommand());
+        Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand());
+        Objects.requireNonNull(this.getCommand("gm")).setExecutor(new GMCommand());
+        Objects.requireNonNull(this.getCommand("heal")).setExecutor(new HealCommand());
+        Objects.requireNonNull(this.getCommand("nick")).setExecutor(new NickCommand());
+        Objects.requireNonNull(this.getCommand("realname")).setExecutor(new RealnameCommand());
+        Objects.requireNonNull(this.getCommand("speed")).setExecutor(new SpeedCommand());
+        Objects.requireNonNull(this.getCommand("unnick")).setExecutor(new UnnickCommand());
 
         //Send
-        Bukkit.getPluginCommand("sendactionbar").setExecutor(new SendActionBarCommand());
-        Bukkit.getPluginCommand("sendmessage").setExecutor(new SendMessageCommand());
-        Bukkit.getPluginCommand("sendtitle").setExecutor(new SendTitleCommand());
+        Objects.requireNonNull(this.getCommand("sendactionbar")).setExecutor(new SendActionBarCommand());
+        Objects.requireNonNull(this.getCommand("sendmessage")).setExecutor(new SendMessageCommand());
+        Objects.requireNonNull(this.getCommand("sendtitle")).setExecutor(new SendTitleCommand());
 
         //Server
-        Bukkit.getPluginCommand("banall").setExecutor(new BanAllCommand());
-        Bukkit.getPluginCommand("config").setExecutor(new ConfigCommand());
-        Bukkit.getPluginCommand("kickall").setExecutor(new KickAllCommand());
+        Objects.requireNonNull(this.getCommand("banall")).setExecutor(new BanAllCommand());
+        Objects.requireNonNull(this.getCommand("config")).setExecutor(new ConfigCommand());
+        Objects.requireNonNull(this.getCommand("kickall")).setExecutor(new KickAllCommand());
 
         //Setter
-        Bukkit.getPluginCommand("setlink").setExecutor(new SetLinkCommand());
-        Bukkit.getPluginCommand("setprefix").setExecutor(new SetPrefixCommand());
+        Objects.requireNonNull(this.getCommand("setlink")).setExecutor(new SetLinkCommand());
+        Objects.requireNonNull(this.getCommand("setprefix")).setExecutor(new SetPrefixCommand());
 
-        //Storing BETA
-        Bukkit.getPluginCommand("backpackstored").setExecutor(new BackpackStoredCommand());
-        Bukkit.getPluginCommand("restoreinventory").setExecutor(new RestoreInventoryCommand());
-        Bukkit.getPluginCommand("storeinventory").setExecutor(new StoreInventoryCommand());
+        //Storing
+        Objects.requireNonNull(this.getCommand("backpackstored")).setExecutor(new BackpackStoredCommand());
+        Objects.requireNonNull(this.getCommand("restoreinventory")).setExecutor(new RestoreInventoryCommand());
+        Objects.requireNonNull(this.getCommand("storeinventory")).setExecutor(new StoreInventoryCommand());
 
         //World
-        Bukkit.getPluginCommand("day").setExecutor(new DayCommand());
-        Bukkit.getPluginCommand("forceloadchunk").setExecutor(new ForceLoadChunkCommand());
-        Bukkit.getPluginCommand("night").setExecutor(new NightCommand());
-        Bukkit.getPluginCommand("worldcreate").setExecutor(new WorldCreateCommand());
-        Bukkit.getPluginCommand("worldlist").setExecutor(new WorldListCommand());
-        Bukkit.getPluginCommand("worldtp").setExecutor(new WorldTPCommand());
-
+        Objects.requireNonNull(this.getCommand("day")).setExecutor(new DayCommand());
+        Objects.requireNonNull(this.getCommand("forceloadchunk")).setExecutor(new ForceLoadChunkCommand());
+        Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand());
     }
 
     public static MarioMain getInstance() {
         return instance;
-    }
-
-    public Prefix getPrefixConfig() {
-        return prefixConfig;
     }
 
     public BackpackManager getBackpackManager() {

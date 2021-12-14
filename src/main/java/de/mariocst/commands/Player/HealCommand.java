@@ -6,13 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class HealCommand implements CommandExecutor {
-
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if(!(sender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length == 1) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[0]);
@@ -26,28 +25,24 @@ public class HealCommand implements CommandExecutor {
                             t.playSound(t.getLocation(), Sound.AMBIENT_CAVE, 0.2f, 1.2f);
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                    sender.sendMessage(MarioMain.getPrefix() + "/heal <Spieler>");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                sender.sendMessage(MarioMain.getPrefix() + "/heal <Spieler>");
             }
             return true;
         }
 
-        Player player = (Player) sender;
-
-        if(player.hasPermission("mario.heal") || player.hasPermission("*") || player.isOp()) {
+        if (player.hasPermission("mario.heal") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length == 0) {
                     player.setHealth(20d);
@@ -55,7 +50,7 @@ public class HealCommand implements CommandExecutor {
                     player.sendMessage(MarioMain.getPrefix() + "Du wurdest geheilt und gesättigt!");
                     player.playSound(player.getLocation(), Sound.AMBIENT_CAVE, 0.2f, 1.2f);
                 }
-                else if (args.length == 1 && player.hasPermission("mario.heal.other")) {
+                else if (args.length == 1 && (player.hasPermission("mario.heal.other") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp())) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[0]);
 
                     try {
@@ -67,29 +62,28 @@ public class HealCommand implements CommandExecutor {
                             t.playSound(t.getLocation(), Sound.AMBIENT_CAVE, 0.2f, 1.2f);
                         }
                         else {
-                            player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                            player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                    player.sendMessage(MarioMain.getPrefix() + "/heal [Spieler]");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.sendMessage(MarioMain.getPrefix() + "/heal [Spieler]");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
-        } else {
+        }
+        else {
             player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return true;
     }

@@ -6,23 +6,25 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class FlyCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             try {
                 if (args.length == 1) {
                     Player t = MarioMain.getInstance().getServer().getPlayer(args[0]);
 
                     try {
                         if (t != null) {
-                            if(!(t.getAllowFlight())) {
+                            if (!(t.getAllowFlight())) {
                                 t.setAllowFlight(true);
                                 t.setFlying(true);
                                 t.sendMessage(MarioMain.getPrefix() + "§aDu fliegst nun.");
                                 sender.sendMessage(MarioMain.getPrefix() + "§aDer Spieler " + t.getName() + " fliegt nun.");
-                            } else {
+                            }
+                            else {
                                 t.setAllowFlight(false);
                                 t.setFlying(false);
                                 t.sendMessage(MarioMain.getPrefix() + "§4Du fliegst nun nicht mehr.");
@@ -30,34 +32,32 @@ public class FlyCommand implements CommandExecutor {
                             }
                         }
                         else {
-                            sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                            sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        sender.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
+                        sender.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
                     }
                 }
                 else {
-                    sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                    sender.sendMessage(MarioMain.getPrefix() + "/fly <Spieler>");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                sender.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
+                sender.sendMessage(MarioMain.getPrefix() + "/fly <Spieler>");
             }
             return false;
         }
 
-        Player player = (Player) sender;
-        if(player.hasPermission("mario.fly") || player.hasPermission("*") || player.isOp()) {
+        if (player.hasPermission("mario.fly") || player.hasPermission("mario.*") || player.hasPermission("*") || player.isOp()) {
             try {
                 if (args.length == 0) {
-                    if(!(player.getAllowFlight())) {
+                    if (!(player.getAllowFlight())) {
                         player.setAllowFlight(true);
                         player.setFlying(true);
                         player.sendMessage(MarioMain.getPrefix() + "§aDu fliegst nun.");
-                    } else {
+                    }
+                    else {
                         player.setAllowFlight(false);
                         player.setFlying(false);
                         player.sendMessage(MarioMain.getPrefix() + "§4Du fliegst nun nicht mehr.");
@@ -68,12 +68,13 @@ public class FlyCommand implements CommandExecutor {
 
                     try {
                         if (t != null) {
-                            if(!(t.getAllowFlight())) {
+                            if (!(t.getAllowFlight())) {
                                 t.setAllowFlight(true);
                                 t.setFlying(true);
                                 t.sendMessage(MarioMain.getPrefix() + "§aDu fliegst nun.");
                                 player.sendMessage(MarioMain.getPrefix() + "§aDer Spieler " + t.getName() + " fliegt nun.");
-                            } else {
+                            }
+                            else {
                                 t.setAllowFlight(false);
                                 t.setFlying(false);
                                 t.sendMessage(MarioMain.getPrefix() + "§4Du fliegst nun nicht mehr.");
@@ -81,29 +82,28 @@ public class FlyCommand implements CommandExecutor {
                             }
                         }
                         else {
-                            player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                            player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                         }
                     }
                     catch (NullPointerException e) {
-                        e.printStackTrace();
-                        player.sendMessage(MarioMain.getPrefix() + "Dieser Spieler existiert nicht!");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                        player.sendMessage(MarioMain.getPrefix() + "Der Spieler " + args[0] + " existiert nicht!");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                     }
                 }
                 else {
-                    player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                    player.sendMessage(MarioMain.getPrefix() + "/fly [Spieler]");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-                player.sendMessage(MarioMain.getPrefix() + "Ungültige Parameter Länge!");
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+                player.sendMessage(MarioMain.getPrefix() + "/fly [Spieler]");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
             }
-        } else {
-            sender.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.2f, 1.2f);
+        }
+        else {
+            player.sendMessage(MarioMain.getPrefix() + "Keine Rechte!");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 1.0f);
         }
         return false;
     }
