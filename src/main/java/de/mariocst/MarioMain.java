@@ -168,6 +168,7 @@ public final class MarioMain extends JavaPlugin {
 
         // Player
         Objects.requireNonNull(this.getCommand("die")).setExecutor(new DieCommand());
+        Objects.requireNonNull(this.getCommand("feed")).setExecutor(new FeedCommand());
         Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand());
         Objects.requireNonNull(this.getCommand("gm")).setExecutor(new GMCommand());
         Objects.requireNonNull(this.getCommand("heal")).setExecutor(new HealCommand());
