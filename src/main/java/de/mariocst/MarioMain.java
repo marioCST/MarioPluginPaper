@@ -156,6 +156,7 @@ public final class MarioMain extends JavaPlugin {
         // Chat
         Objects.requireNonNull(this.getCommand("broadcast")).setExecutor(new BroadcastCommand());
         Objects.requireNonNull(this.getCommand("chatclear")).setExecutor(new ChatClearCommand());
+        Objects.requireNonNull(this.getCommand("colorcodes")).setExecutor(new ColorCodesCommand());
 
         // Inventory
         Objects.requireNonNull(this.getCommand("backpack")).setExecutor(new BackpackCommand());

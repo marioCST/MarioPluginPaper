@@ -168,6 +168,10 @@ commands:
   feed:
     description: Sättigt dich.
     permission: mario.feed
+  colorcodes:
+    description: Alle Color Codes in einer Liste!
+    aliases: [ "ccodes", "colorc" ]
+    permission: mario.colorcodes
 
 permissions:
   mario.*:
@@ -216,12 +220,13 @@ permissions:
       mario.setprefix: true
       mario.config: true
       mario.feed: true
+      mario.colorcodes: true
   mario.heal:
-    description: Damit kannst du dich heilen.
+    description: Rechte für den /heal Command!
     default: op
     children:
       mario.heal.other:
-        description: Rechte, um andere zu heilen!
+        description: Heile andere Spieler!
         default: op
   mario.reload:
     description: Rechte für den /announcereload Command!
@@ -353,3 +358,6 @@ permissions:
       mario.feed.other:
         description: Sättige andere Spieler!
         default: op
+  mario.colorcodes:
+    description: Rechte für den /colorcodes Command!
+    default: op
