@@ -1,6 +1,7 @@
 Mario Plugin für PaperSpigot/Spigot
 
 Minecraft Version: 1.18.1
+
 JDK: 17
 
 
